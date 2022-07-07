@@ -1,15 +1,11 @@
 import { BaseEntity } from './../../../common/base/base-entity';
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
-import { Entity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity({ name: 'price' })
 export class Price extends BaseEntity {
-  @ApiProperty()
-  @IsNotEmpty()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   halfPrice: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   findOut: number;
 }

@@ -1,9 +1,12 @@
-import { Column } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreatePriceDto {
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @ApiProperty()
+  @IsNotEmpty()
   halfPrice: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @ApiProperty()
+  @IsNotEmpty()
   findOut: number;
 }
