@@ -3,8 +3,8 @@ import { Genre } from '../../../common/enums/Gener-enum';
 import { Classification } from '../../../common/enums/Classification-enum';
 import { Column, Entity } from 'typeorm';
 
-@Entity({ name: 'filmes' })
-export class Film extends BaseEntity {
+@Entity({ name: 'movies' })
+export class Movie extends BaseEntity {
   @Column({ type: 'varchar' })
   title: string;
 

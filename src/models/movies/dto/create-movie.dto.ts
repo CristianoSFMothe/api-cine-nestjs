@@ -3,7 +3,7 @@ import { Classification } from '../../../common/enums/Classification-enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateFilmDto {
+export class CreateMovieDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
