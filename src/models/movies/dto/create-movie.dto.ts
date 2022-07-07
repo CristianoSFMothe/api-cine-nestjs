@@ -1,7 +1,7 @@
 import { Genre } from '../../../common/enums/Gener-enum';
 import { Classification } from '../../../common/enums/Classification-enum';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateMovieDto {
   @ApiProperty()
@@ -20,7 +20,6 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum({ isEnum: true })
   classification: Classification;
 
   @ApiProperty()

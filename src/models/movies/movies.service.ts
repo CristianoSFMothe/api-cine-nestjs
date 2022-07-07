@@ -35,7 +35,7 @@ export class MoviesService {
     });
 
     if (titleExists) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.MOVIE_TITLE_EXISTS);
     }
 
     return await this.moviesRepository.save(movie);
