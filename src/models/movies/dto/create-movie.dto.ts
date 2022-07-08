@@ -10,8 +10,8 @@ export class CreateMovieDto {
   title: string;
 
   @ApiProperty()
-  @IsString({ each: true })
   @IsNotEmpty()
+  @IsString({ each: true })
   genres: string[];
 
   @ApiProperty()
