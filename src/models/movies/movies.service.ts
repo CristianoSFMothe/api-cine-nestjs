@@ -18,11 +18,16 @@ export class MoviesService {
   ) {}
 
   async findAll(): Promise<Movie[]> {
-    return await this.moviesRepository.find();
+    return await this.moviesRepository.find({
+      relations: ['genres'],
+    });
   }
 
   async findOne(id: string): Promise<Movie> {
-    const movie = await this.moviesRepository.findOne({ where: { id: id } });
+    const movie = await this.moviesRepository.findOne({
+      where: { id: id },
+      relations: ['genres'],
+    });
 
     if (!movie) {
       throw new NotFoundException(MessagesHelper.MOVIE_NOT_FOUND);
@@ -33,9 +38,7 @@ export class MoviesService {
 
   async create(createMovieDto: CreateMovieDto): Promise<Movie> {
     const genres = await Promise.all(
-      createMovieDto.genres.map(
-        (name: Genre): Promise<Genre> => this.preloadGenreByName(name.name),
-      ),
+      createMovieDto.genres.map((name) => this.preloadGenreByName(name)),
     );
 
     const movie = this.moviesRepository.create({
@@ -58,7 +61,7 @@ export class MoviesService {
     const genres =
       updateMovieDto.genres &&
       (await Promise.all(
-        updateMovieDto.genres.map((name) => this.preloadGenreByName(name.name)),
+        updateMovieDto.genres.map((name) => this.preloadGenreByName(name)),
       ));
 
     const movie = await this.moviesRepository.preload({
