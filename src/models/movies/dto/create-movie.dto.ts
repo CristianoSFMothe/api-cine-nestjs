@@ -1,7 +1,7 @@
-import { Genre } from '../../../common/enums/Gener-enum';
 import { Classification } from '../../../common/enums/Classification-enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Genre } from '../entities/genre.entity';
 
 export class CreateMovieDto {
   @ApiProperty()
@@ -10,8 +10,9 @@ export class CreateMovieDto {
   title: string;
 
   @ApiProperty()
+  @IsString({ each: true })
   @IsNotEmpty()
-  genre: Genre;
+  genres: Genre[];
 
   @ApiProperty()
   @IsNotEmpty()
