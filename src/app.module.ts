@@ -5,6 +5,7 @@ import { MoviesModule } from './models/movies/movies.module';
 import { PriceModule } from './models/price/price.module';
 import { RoomModule } from './models/room/room.module';
 import { ItemsModule } from './models/items/items.module';
+import { CombosModule } from './models/combos/combos.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ItemsModule } from './models/items/items.module';
     PriceModule,
     RoomModule,
     ItemsModule,
+    CombosModule,
   ],
   controllers: [],
   providers: [],

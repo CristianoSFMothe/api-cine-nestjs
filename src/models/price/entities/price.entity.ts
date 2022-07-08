@@ -3,9 +3,19 @@ import { Column, Entity } from 'typeorm';
 
 @Entity({ name: 'price' })
 export class Price extends BaseEntity {
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({
+    name: 'half_price',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+  })
   halfPrice: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
-  findOut: number;
+  @Column({
+    name: 'entire_entryt',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+  })
+  entireEntry: number;
 }
