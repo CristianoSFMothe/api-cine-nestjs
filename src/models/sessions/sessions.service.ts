@@ -20,7 +20,7 @@ export class SessionsService {
     const session = this.sessionsRepository.create(createSessionDto);
 
     const sessionsRoomExists = await this.roonsRepository.findOne({
-      where: { id: createSessionDto.roomId },
+      where: { roomId: createSessionDto.roomId },
     });
 
     if (sessionsRoomExists) {

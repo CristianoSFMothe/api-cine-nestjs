@@ -11,7 +11,7 @@ export class Session extends BaseEntity {
   exhibition: string;
 
   @Column()
-  roomId: SessionsRoomDto;
+  roomId: string;
 
   @Column()
   priceId: string;

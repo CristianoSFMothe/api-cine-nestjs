@@ -13,7 +13,7 @@ export class CreateSessionDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  roomId: SessionsRoomDto;
+  roomId: string;
 
   @ApiProperty()
   @IsNotEmpty()
