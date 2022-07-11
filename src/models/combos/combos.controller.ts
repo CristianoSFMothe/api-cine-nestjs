@@ -7,12 +7,14 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CombosService } from './combos.service';
 import { CreateComboDto } from './dto/create-combo.dto';
 import { UpdateComboDto } from './dto/update-combo.dto';
 import { Combo } from './entities/combo.entity';
 
-@Controller('combos')
+@ApiTags('Combos')
+@Controller('api/combos')
 export class CombosController {
   constructor(private readonly combosService: CombosService) {}
 
