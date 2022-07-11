@@ -1,4 +1,3 @@
-import { Genre } from './entities/genre.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessagesHelper } from '../../common/messages/messages.helper';
@@ -6,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
+import { Genre } from '../genre/entities/genre.entity';
 
 @Injectable()
 export class MoviesService {
@@ -19,12 +19,15 @@ export class MoviesService {
 
   async findAll(): Promise<Movie[]> {
     return await this.moviesRepository.find({
-      relations: ['genres']
+      relations: ['genres'],
     });
   }
 
   async findOne(id: string): Promise<Movie> {
-    const movie = await this.moviesRepository.findOne({ where: { id: id }, relations: ['genres'] });
+    const movie = await this.moviesRepository.findOne({
+      where: { id: id },
+      relations: ['genres'],
+    });
 
     if (!movie) {
       throw new NotFoundException(MessagesHelper.MOVIE_NOT_FOUND);
@@ -33,18 +36,11 @@ export class MoviesService {
     return movie;
   }
 
-  async create(createMovieDto: CreateMovieDto): Promise<Movie> {
-    const genres = await Promise.all(
-      createMovieDto.genres.map((name) => this.preloadGenreByName(name)),
-    );
-
-    const movie = this.moviesRepository.create({
-      ...createMovieDto,
-      genres,
-    });
+  async create(data: CreateMovieDto): Promise<Movie> {
+    const movie = this.moviesRepository.create(data);
 
     const titleExists = await this.moviesRepository.findOne({
-      title: createMovieDto.title,
+      title: data.title,
     });
 
     if (titleExists) {
@@ -52,19 +48,42 @@ export class MoviesService {
     }
 
     return await this.moviesRepository.save(movie);
+
+    // const group = new Genre();
+    // group.type = data.genreId;
+    // group.movieId = await this.genreRepository.findByIds(data.genreId);
+
+    // return this.moviesRepository.save(group);
+
+    // const movie = await this.moviesRepository.findOne({
+    //   relations: ['genres'],
+    // });
+
+    // const genres = [];
+
+    // for (const genre of movie.genres) {
+    //   const genreRepository = await this.genreRepository.findOne(genre.id, {
+    //     relations: ['movieId'],
+    //   });
+
+    //   for (const groupGerne of genreRepository.type) {
+    //     const groupGenreRepository = await this.genreRepository.findOne(
+    //       groupGerne,
+    //       {
+    //         relations: ['items'],
+    //       },
+    //     );
+    //     genres.push(groupGenreRepository, groupGerne);
+    //   }
+    // }
+
+    // return await this.genreRepository.save(movie);
   }
 
   async update(id: string, updateMovieDto: UpdateMovieDto): Promise<Movie> {
-    const genres =
-      updateMovieDto.genres &&
-      (await Promise.all(
-        updateMovieDto.genres.map((name) => this.preloadGenreByName(name)),
-      ));
-
     const movie = await this.moviesRepository.preload({
       id,
       ...updateMovieDto,
-      genres,
     });
 
     if (!movie) {
@@ -82,16 +101,5 @@ export class MoviesService {
     }
 
     return await this.moviesRepository.remove(movie);
-  }
-
-  // Método para verificar se já existe o gênero do filme criado
-  private async preloadGenreByName(name: string): Promise<Genre> {
-    const genre = await this.genreRepository.findOne(name);
-
-    if (genre) {
-      return genre;
-    }
-
-    return this.genreRepository.create({ name });
   }
 }

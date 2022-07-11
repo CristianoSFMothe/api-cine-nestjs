@@ -7,7 +7,6 @@ export class CreateMovieDto {
   @IsNotEmpty()
   @IsString()
   title: string;
-
   
   @ApiProperty()
   @IsNotEmpty()
@@ -30,5 +29,5 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  genres: string;
+  genreId: string;
 }
