@@ -3,4 +3,5 @@ export const MessagesHelper = {
   MOVIE_TITLE_EXISTS: 'Já existe esse filme cadastrado.',
   PRICE_NOT_FOUND: 'Não possível localizar a pesquisa.',
   ROOM_EXISTS: 'Sala já existe.',
+  GENRE_IS_EXISTING: 'Já existe esse gênero.'
 };

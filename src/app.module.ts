@@ -7,6 +7,7 @@ import { RoomModule } from './models/room/room.module';
 import { ItemsModule } from './models/items/items.module';
 import { CombosModule } from './models/combos/combos.module';
 import { SessionsModule } from './models/sessions/sessions.module';
+import { GenreModule } from './models/genre/genre.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SessionsModule } from './models/sessions/sessions.module';
     ItemsModule,
     CombosModule,
     SessionsModule,
+    GenreModule,
   ],
   controllers: [],
   providers: [],

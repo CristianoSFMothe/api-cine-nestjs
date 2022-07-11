@@ -14,7 +14,7 @@ import { Session } from './entities/session.entity';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Sessão')
-@Controller('sessions')
+@Controller('api/sessions')
 export class SessionsController {
   constructor(private readonly sessionsService: SessionsService) {}
 
