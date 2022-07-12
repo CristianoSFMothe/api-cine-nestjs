@@ -4,8 +4,8 @@ import { Column, Entity, ManyToMany } from 'typeorm';
 
 @Entity({ name: 'genre' })
 export class Genre extends BaseEntity {
-  @Column('text', { array: true, nullable: true })
-  type?: string;
+  @Column()
+  type: string;
 
   @ManyToMany(() => Movie, (movie: Movie) => movie.genres)
   movies: Movie[];

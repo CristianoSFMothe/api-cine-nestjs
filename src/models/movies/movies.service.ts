@@ -1,3 +1,4 @@
+import { Genre } from './../genre/entities/genre.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessagesHelper } from '../../common/messages/messages.helper';
@@ -5,7 +6,6 @@ import { Repository } from 'typeorm';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entities/movie.entity';
-import { Genre } from '../genre/entities/genre.entity';
 
 @Injectable()
 export class MoviesService {
@@ -37,47 +37,17 @@ export class MoviesService {
   }
 
   async create(data: CreateMovieDto): Promise<Movie> {
-    const movie = this.moviesRepository.create(data);
-
-    const titleExists = await this.moviesRepository.findOne({
-      title: data.title,
-    });
-
-    if (titleExists) {
-      throw new NotFoundException(MessagesHelper.MOVIE_TITLE_EXISTS);
-    }
+    const movie = new Movie();
+    movie.title = data.title;
+    movie.recommendation = data.recommendation;
+    movie.classification = data.classification;
+    movie.duration = data.duration;
+    movie.description = data.description;
+    
+    movie.genres = await this.genreRepository.findByIds(data.genres);
 
     return await this.moviesRepository.save(movie);
-
-    // const group = new Genre();
-    // group.type = data.genreId;
-    // group.movieId = await this.genreRepository.findByIds(data.genreId);
-
-    // return this.moviesRepository.save(group);
-
-    // const movie = await this.moviesRepository.findOne({
-    //   relations: ['genres'],
-    // });
-
-    // const genres = [];
-
-    // for (const genre of movie.genres) {
-    //   const genreRepository = await this.genreRepository.findOne(genre.id, {
-    //     relations: ['movieId'],
-    //   });
-
-    //   for (const groupGerne of genreRepository.type) {
-    //     const groupGenreRepository = await this.genreRepository.findOne(
-    //       groupGerne,
-    //       {
-    //         relations: ['items'],
-    //       },
-    //     );
-    //     genres.push(groupGenreRepository, groupGerne);
-    //   }
-    // }
-
-    // return await this.genreRepository.save(movie);
+    
   }
 
   async update(id: string, updateMovieDto: UpdateMovieDto): Promise<Movie> {
