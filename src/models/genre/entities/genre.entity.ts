@@ -1,12 +1,12 @@
 import { Movie } from './../../movies/entities/movie.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, ManyToMany } from "typeorm";
+import { Column, Entity, ManyToMany } from 'typeorm';
 
-@Entity({name: 'genre'})
+@Entity({ name: 'genre' })
 export class Genre extends BaseEntity {
-  @Column()
-  type: string;
+  @Column('text', { array: true, nullable: true })
+  type?: string;
 
   @ManyToMany(() => Movie, (movie: Movie) => movie.genres)
-  movieId: Genre
+  movies: Movie[];
 }
