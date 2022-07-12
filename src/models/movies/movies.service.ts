@@ -1,3 +1,4 @@
+import  AppError  from '../../common/AppError/AppError';
 import { Genre } from './../genre/entities/genre.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -37,23 +38,25 @@ export class MoviesService {
   }
 
   async create(data: CreateMovieDto): Promise<Movie> {
-    const movie = new Movie();
-    movie.title = data.title;
-    movie.recommendation = data.recommendation;
-    movie.classification = data.classification;
-    movie.duration = data.duration;
-    movie.description = data.description;
-    
+    const movie = this.moviesRepository.create(data);
+
     movie.genres = await this.genreRepository.findByIds(data.genres);
 
+    const titleExist = await this.moviesRepository.findOne({
+      title: data.title,
+    });
+
+    if (titleExist) {
+      throw new AppError(MessagesHelper.MOVIE_TITLE_EXISTS);
+    }
+
     return await this.moviesRepository.save(movie);
-    
   }
 
-  async update(id: string, updateMovieDto: UpdateMovieDto): Promise<Movie> {
+  async update(id: string, data: UpdateMovieDto): Promise<Movie> {
     const movie = await this.moviesRepository.preload({
       id,
-      ...updateMovieDto,
+      ...data,
     });
 
     if (!movie) {
