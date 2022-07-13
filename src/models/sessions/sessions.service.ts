@@ -48,13 +48,14 @@ export class SessionsService {
 
   async findAll(): Promise<Session[]> {
     return await this.sessionsRepository.find({
-      relations: ['roons'],
+      relations: ['roons', 'movies'],
     });
   }
 
   async findOne(id: string): Promise<Session> {
     const session = await this.sessionsRepository.findOne({
       where: { id: id },
+      relations: ['roons', 'movies'],
     });
 
     if (!session) {

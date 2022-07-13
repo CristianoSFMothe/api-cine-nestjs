@@ -3,7 +3,8 @@
 [x] - Ter o **Filme** em cartaz
 [x] - **Filme** em cartaz com seus **Gêneros** e **Classifição etária**
 [] - Filme que irá estrear
-[] - Uma **Sessão** pode acontece em várias **Salas**
+[x] - Uma **Sessão** pode acontece em várias **Salas**
+[x] - Uma **Sessão** pode acontece em várias **Filme**
 [] - Uma **Sessão** tem vários horário de **Exibição**
 [] - Comprar de pipocas -> combos
 
