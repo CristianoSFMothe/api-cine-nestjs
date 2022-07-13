@@ -11,4 +11,5 @@ export class Room extends BaseEntity {
 
   @Column({ name: 'minimum_capacity', type: 'int' })
   minimumCapacity: number;
+  
 }

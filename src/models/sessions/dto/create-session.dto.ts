@@ -1,3 +1,4 @@
+import { Room } from './../../room/entities/room.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { SessionsRoomDto } from './sessionRoom.dto';

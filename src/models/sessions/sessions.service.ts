@@ -16,16 +16,16 @@ export class SessionsService {
     private readonly roonsRepository: Repository<Room>,
   ) {}
 
-  async create(createSessionDto: CreateSessionDto): Promise<Session> {
-    const session = this.sessionsRepository.create(createSessionDto);
+  async create(data: CreateSessionDto): Promise<Session> {
+    const session = this.sessionsRepository.create(data);
 
-    const sessionsRoomExists = await this.roonsRepository.findOne({
-      where: { roomId: createSessionDto.roomId },
-    });
+    // const sessionsRoomExists = await this.roonsRepository.findOne({
+    //   where: { roomId: createSessionDto.roomId },
+    // });
 
-    if (sessionsRoomExists) {
-      throw new NotFoundException();
-    }
+    // if (sessionsRoomExists) {
+    //   throw new NotFoundException();
+    // }
 
     return await this.sessionsRepository.save(session);
   }
