@@ -1,7 +1,7 @@
+import { Movie } from './../../movies/entities/movie.entity';
 import { Room } from './../../room/entities/room.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { SessionsRoomDto } from '../dto/sessionRoom.dto';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'sessions' })
 export class Session extends BaseEntity {
@@ -10,16 +10,15 @@ export class Session extends BaseEntity {
 
   @Column()
   exhibition: string;
-  
-  @Column()
-  movieId: string;
+
+  @OneToMany(() => Movie, (movie: Movie) => movie.sessions)
+  movies: Movie[];
 
   @OneToMany(() => Room, (room: Room) => room.sessions)
   roons: Room[];
 
   @Column()
   priceId: string;
-
 
   @Column()
   comboId: string;

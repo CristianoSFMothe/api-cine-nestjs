@@ -1,3 +1,4 @@
+import { Movie } from './../movies/entities/movie.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,14 +13,27 @@ export class SessionsService {
     @InjectRepository(Session)
     private readonly sessionsRepository: Repository<Session>,
 
+    @InjectRepository(Movie)
+    private readonly moviesRepository: Repository<Movie>,
+
     @InjectRepository(Room)
     private readonly roonsRepository: Repository<Room>,
   ) {}
 
-  async create(data: CreateSessionDto): Promise<Session> {
+  async createSession(data: CreateSessionDto): Promise<Session> {
     const session = this.sessionsRepository.create(data);
 
+    session.movies = await this.moviesRepository.findByIds(data.movies);
+
     session.roons = await this.roonsRepository.findByIds(data.roons);
+
+    // const roomExists = await this.sessionsRepository.findOne({
+    //   where: { roomId: data.roomId },
+    // });
+
+    // if (!roomExists) {
+    //   throw new NotFoundException();
+    // }
 
     const sessionExists = await this.sessionsRepository.findOne({
       id: session.id,
@@ -33,7 +47,9 @@ export class SessionsService {
   }
 
   async findAll(): Promise<Session[]> {
-    return await this.sessionsRepository.find();
+    return await this.sessionsRepository.find({
+      relations: ['roons'],
+    });
   }
 
   async findOne(id: string): Promise<Session> {

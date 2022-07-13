@@ -20,7 +20,7 @@ export class SessionsController {
 
   @Post()
   create(@Body() createSessionDto: CreateSessionDto): Promise<Session> {
-    return this.sessionsService.create(createSessionDto);
+    return this.sessionsService.createSession(createSessionDto);
   }
 
   @Get()

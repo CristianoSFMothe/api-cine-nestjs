@@ -1,7 +1,9 @@
+import { RoomDto } from './Room.dto';
+import { Movie } from './../../movies/entities/movie.entity';
 import { Room } from './../../room/entities/room.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { SessionsRoomDto } from './sessionRoom.dto';
+
 
 export class CreateSessionDto {
   @ApiProperty()
@@ -11,6 +13,10 @@ export class CreateSessionDto {
   @ApiProperty()
   @IsNotEmpty()
   exhibition: string;
+
+  // @ApiProperty()
+  // @IsNotEmpty()
+  // roomId: RoomDto;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -22,7 +28,7 @@ export class CreateSessionDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  movieId: string;
+  movies: Movie[];
 
   @ApiProperty()
   @IsNotEmpty()

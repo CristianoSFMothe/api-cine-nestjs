@@ -37,4 +37,7 @@ export class Movie extends BaseEntity {
   @ManyToMany(() => Genre, (genre: Genre) => genre.movies, { cascade: true })
   @JoinTable()
   genres: Genre[];
+
+  @ManyToOne(() => Session, (session: Session) => session.roons)
+  sessions: Session;
 }
