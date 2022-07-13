@@ -19,13 +19,15 @@ export class SessionsService {
   async create(data: CreateSessionDto): Promise<Session> {
     const session = this.sessionsRepository.create(data);
 
-    // const sessionsRoomExists = await this.roonsRepository.findOne({
-    //   where: { roomId: createSessionDto.roomId },
-    // });
+    session.roons = await this.roonsRepository.findByIds(data.roons);
 
-    // if (sessionsRoomExists) {
-    //   throw new NotFoundException();
-    // }
+    const sessionExists = await this.sessionsRepository.findOne({
+      id: session.id,
+    });
+
+    if (sessionExists) {
+      throw new NotFoundException();
+    }
 
     return await this.sessionsRepository.save(session);
   }
@@ -62,7 +64,7 @@ export class SessionsService {
     return await this.sessionsRepository.save(session);
   }
 
-  async remove(id: string): Promise<Session>  {
+  async remove(id: string): Promise<Session> {
     const session = await this.sessionsRepository.findOne({
       where: { id: id },
     });

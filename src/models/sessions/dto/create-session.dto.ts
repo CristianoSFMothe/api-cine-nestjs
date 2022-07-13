@@ -14,7 +14,7 @@ export class CreateSessionDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  roomId: string;
+  roons: Room[];
 
   @ApiProperty()
   @IsNotEmpty()
