@@ -1,3 +1,4 @@
+import { Room } from './../../room/entities/room.entity';
 import { Session } from './../../sessions/entities/session.entity';
 import { Genre } from './../../genre/entities/genre.entity';
 import { BaseEntity } from '../../../common/base/base-entity';
@@ -5,6 +6,7 @@ import { Classification } from '../../../common/enums/Classification-enum';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -38,6 +40,12 @@ export class Movie extends BaseEntity {
   @JoinTable()
   genres: Genre[];
 
-  @ManyToOne(() => Session, (session: Session) => session.roons)
-  sessions: Session;
+  // TODO: Trocar aqui para OneToMany
+
+  // @ManyToOne(() => Session, (session: Session)=> session.movies)
+  // @JoinTable()
+  // sessions: Session[];
+
+  @OneToMany(() => Room, (room: Room) => room.movies)
+  rooms: Room[];
 }

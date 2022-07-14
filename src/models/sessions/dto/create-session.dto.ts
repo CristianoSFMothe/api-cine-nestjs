@@ -24,11 +24,7 @@ export class CreateSessionDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  priceId: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  movies: Movie[];
+  priceId: string;  
 
   @ApiProperty()
   @IsNotEmpty()

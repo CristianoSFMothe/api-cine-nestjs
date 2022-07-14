@@ -1,3 +1,5 @@
+import { Room } from './../../room/entities/room.entity';
+import { Session } from './../../sessions/entities/session.entity';
 import { Genre } from './../../genre/entities/genre.entity';
 import { Classification } from '../../../common/enums/Classification-enum';
 import { ApiProperty } from '@nestjs/swagger';
@@ -31,4 +33,12 @@ export class CreateMovieDto {
   @ApiProperty()
   @IsNotEmpty()
   genres: Genre[];
+
+  // @ApiProperty()
+  // @IsNotEmpty()
+  // sessions: Session[];
+
+  @ApiProperty()
+  @IsNotEmpty()
+  rooms: Room[];
 }

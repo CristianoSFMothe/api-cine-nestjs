@@ -6,6 +6,7 @@ import { Room } from '../room/entities/room.entity';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import { Session } from './entities/session.entity';
+import { title } from 'process';
 
 @Injectable()
 export class SessionsService {
@@ -22,9 +23,7 @@ export class SessionsService {
 
   async createSession(data: CreateSessionDto): Promise<Session> {
     const session = this.sessionsRepository.create(data);
-
-    session.movies = await this.moviesRepository.findByIds(data.movies);
-
+    
     session.roons = await this.roonsRepository.findByIds(data.roons);
 
     // const roomExists = await this.sessionsRepository.findOne({
@@ -48,14 +47,14 @@ export class SessionsService {
 
   async findAll(): Promise<Session[]> {
     return await this.sessionsRepository.find({
-      relations: ['roons', 'movies'],
+      relations: ['roons',],
     });
   }
 
   async findOne(id: string): Promise<Session> {
     const session = await this.sessionsRepository.findOne({
       where: { id: id },
-      relations: ['roons', 'movies'],
+      relations: ['roons',],
     });
 
     if (!session) {

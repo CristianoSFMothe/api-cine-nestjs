@@ -3,10 +3,13 @@
 [x] - Ter o **Filme** em cartaz
 [x] - **Filme** em cartaz com seus **Gêneros** e **Classifição etária**
 [] - Filme que irá estrear
-[x] - Uma **Sessão** pode acontece em várias **Salas**
-[x] - Uma **Sessão** pode acontece em várias **Filme**
+[] - Um **Filme** pode acontece em várias **Salas** e ter várias **Sessões**
+
 [] - Uma **Sessão** tem vários horário de **Exibição**
 [] - Comprar de pipocas -> combos
+
+Filme tem Relacionamento com salas
+Salas tem Relacionamento com sessões
 
 [] - Quando a pessoa compra a pipoca - combo com o ticked do filme terá desconto, se comprar sem o ticked do filme preço normal
 [] - Quantidade de assentos - posição do assento

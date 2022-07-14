@@ -8,7 +8,6 @@ import { ItemsModule } from './models/items/items.module';
 import { CombosModule } from './models/combos/combos.module';
 import { SessionsModule } from './models/sessions/sessions.module';
 import { GenreModule } from './models/genre/genre.module';
-import { ExhibitionModule } from './models/exhibition/exhibition.module';
 
 @Module({
   imports: [
@@ -20,7 +19,6 @@ import { ExhibitionModule } from './models/exhibition/exhibition.module';
     CombosModule,
     SessionsModule,
     GenreModule,
-    ExhibitionModule,
   ],
   controllers: [],
   providers: [],
