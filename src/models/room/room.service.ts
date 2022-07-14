@@ -1,3 +1,4 @@
+import { Session } from './../sessions/entities/session.entity';
 import { MessagesHelper } from './../../common/messages/messages.helper';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,10 +13,15 @@ export class RoomService {
   constructor(
     @InjectRepository(Room)
     private readonly roomRepository: Repository<Room>,
+
+    @InjectRepository(Session)
+    private readonly sessionRepository: Repository<Session>,
   ) {}
 
   async create(data: CreateRoomDto): Promise<Room> {
     const room = this.roomRepository.create(data);
+
+    room.sessions = await this.sessionRepository.findByIds(data.sessions);
 
     const roomExists = await this.roomRepository.findOne({
       name: data.name,
@@ -29,7 +35,7 @@ export class RoomService {
   }
 
   async findAll(): Promise<Room[]> {
-    return await this.roomRepository.find();
+    return await this.roomRepository.find({ relations: ['sessions'] });
   }
 
   async findOne(id: string): Promise<Room> {

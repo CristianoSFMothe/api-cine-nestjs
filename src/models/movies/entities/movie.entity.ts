@@ -1,5 +1,5 @@
+import { TypeMovie } from './../../../common/enums/TypeMovie-enum';
 import { Room } from './../../room/entities/room.entity';
-import { Session } from './../../sessions/entities/session.entity';
 import { Genre } from './../../genre/entities/genre.entity';
 import { BaseEntity } from '../../../common/base/base-entity';
 import { Classification } from '../../../common/enums/Classification-enum';
@@ -9,10 +9,8 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
-  ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'movies' })
 export class Movie extends BaseEntity {
@@ -26,9 +24,18 @@ export class Movie extends BaseEntity {
     type: 'enum',
     enum: Classification,
     nullable: false,
-    default: Classification.livre,
+    default: Classification.free,
   })
   classification: Classification;
+
+  @Column({
+    name: 'type_movie',
+    type: 'enum',
+    enum: TypeMovie,
+    nullable: false,
+    default: TypeMovie.dubbed,
+  })
+  typeMovie: TypeMovie;
 
   @Column({ type: 'int' })
   duration: number;
@@ -41,11 +48,7 @@ export class Movie extends BaseEntity {
   genres: Genre[];
 
   // TODO: Trocar aqui para OneToMany
-
-  // @ManyToOne(() => Session, (session: Session)=> session.movies)
-  // @JoinTable()
-  // sessions: Session[];
-
   @OneToMany(() => Room, (room: Room) => room.movies)
+  @JoinColumn()
   rooms: Room[];
 }

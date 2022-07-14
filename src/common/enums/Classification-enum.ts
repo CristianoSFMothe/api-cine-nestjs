@@ -1,8 +1,8 @@
 export enum Classification {
-  livre = 'livre',
-  menor_10 = 'menor_10',
-  menor_12 = 'menor_12',
-  menor_14 = 'menor_14',
-  menor_16 = 'menor_16',
-  menor_18 = 'menor_18',
+  free = 'free',
+  minor_10 = 'minor_10',
+  minor_12 = 'minor_12',
+  minor_14 = 'minor_14',
+  minor_16 = 'minor_16',
+  minor_18 = 'minor_18',
 }

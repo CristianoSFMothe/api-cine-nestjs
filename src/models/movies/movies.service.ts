@@ -21,9 +21,6 @@ export class MoviesService {
 
     @InjectRepository(Room)
     private readonly roomsRepository: Repository<Room>,
-
-    @InjectRepository(Session)
-    private readonly sessionRepository: Repository<Session>,
   ) {}
 
   async findAll(): Promise<Movie[]> {
@@ -49,8 +46,6 @@ export class MoviesService {
     const movie = this.moviesRepository.create(data);
 
     movie.genres = await this.genreRepository.findByIds(data.genres);
-
-    // movie.sessions = await this.sessionRepository.findByIds(data.sessions);
 
     movie.rooms = await this.roomsRepository.findByIds(data.rooms);
 
