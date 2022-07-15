@@ -8,6 +8,7 @@ import { ItemsModule } from './models/items/items.module';
 import { CombosModule } from './models/combos/combos.module';
 import { SessionsModule } from './models/sessions/sessions.module';
 import { GenreModule } from './models/genre/genre.module';
+import { TicketModule } from './models/ticket/ticket.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { GenreModule } from './models/genre/genre.module';
     CombosModule,
     SessionsModule,
     GenreModule,
+    TicketModule,
   ],
   controllers: [],
   providers: [],

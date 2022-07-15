@@ -24,8 +24,6 @@ export class Room extends BaseEntity {
     default: TypeRoom.two_D,
   })
   typeRoom: TypeRoom;
-
-  // TODO OneToMany
   
   @OneToMany(() => Session, (session: Session) => session.rooms)
   sessions: Session[];

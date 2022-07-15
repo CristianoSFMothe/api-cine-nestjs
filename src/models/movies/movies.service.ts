@@ -52,14 +52,6 @@ export class MoviesService {
 
     movie.rooms = await this.roomsRepository.findByIds(data.rooms);
 
-    const titleExist = await this.moviesRepository.findOne({
-      title: data.title,
-    });
-
-    if (titleExist) {
-      throw new AppError(MessagesHelper.MOVIE_TITLE_EXISTS);
-    }
-
     return await this.moviesRepository.save(movie);
   }
 
@@ -95,13 +87,16 @@ export class MoviesService {
 
     const roomsRepository = await this.roomsRepository.find({
       relations: ['sessions'],
+      where : { movies: movie.id }
     });
 
     room.push(roomsRepository);
 
     return {
       movie: {
+        id: movie.id,
         title: movie.title,
+        recommendation: movie.recommendation,
         classification: movie.classification,
         typeMovie: movie.typeMovie,
         duration: movie.duration,
