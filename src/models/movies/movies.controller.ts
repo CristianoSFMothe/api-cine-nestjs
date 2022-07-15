@@ -45,4 +45,9 @@ export class MoviesController {
   async remove(@Param('id') id: string): Promise<Movie> {
     return await this.moviesService.remove(id);
   }
+
+  @Get(':allMovie/:id')
+  async findAllMovie(@Param('id') id: string) {
+    return this.moviesService.findAllMovie(id);
+  }
 }
