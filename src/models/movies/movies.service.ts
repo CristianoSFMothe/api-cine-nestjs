@@ -1,5 +1,5 @@
 import { Room } from './../room/entities/room.entity';
-import  AppError  from '../../common/AppError/AppError';
+import AppError from '../../common/AppError/AppError';
 import { Genre } from './../genre/entities/genre.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,12 +23,12 @@ export class MoviesService {
     private readonly roomsRepository: Repository<Room>,
 
     @InjectRepository(Session)
-    private readonly sessionRepository: Repository<Session>,
+    private readonly sessionsRepository: Repository<Session>,
   ) {}
 
   async findAll(): Promise<Movie[]> {
     return await this.moviesRepository.find({
-      relations: ['genres', 'rooms'],
+      relations: ['genres'],
     });
   }
 
@@ -49,8 +49,6 @@ export class MoviesService {
     const movie = this.moviesRepository.create(data);
 
     movie.genres = await this.genreRepository.findByIds(data.genres);
-
-    // movie.sessions = await this.sessionRepository.findByIds(data.sessions);
 
     movie.rooms = await this.roomsRepository.findByIds(data.rooms);
 
@@ -86,5 +84,31 @@ export class MoviesService {
     }
 
     return await this.moviesRepository.remove(movie);
+  }
+
+  async findAllMovie(id: string) {
+    const movie = await this.moviesRepository.findOne(id, {
+      relations: ['genres'],
+    });
+
+    const room = [];
+
+    const roomsRepository = await this.roomsRepository.find({
+      relations: ['sessions'],
+    });
+
+    room.push(roomsRepository);
+
+    return {
+      movie: {
+        title: movie.title,
+        classification: movie.classification,
+        typeMovie: movie.typeMovie,
+        duration: movie.duration,
+        description: movie.description,
+        genres: movie.genres,
+        room: room,
+      },
+    };
   }
 }
