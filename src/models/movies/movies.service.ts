@@ -21,11 +21,14 @@ export class MoviesService {
 
     @InjectRepository(Room)
     private readonly roomsRepository: Repository<Room>,
+
+    @InjectRepository(Session)
+    private readonly sessionsRepository: Repository<Session>,
   ) {}
 
   async findAll(): Promise<Movie[]> {
     return await this.moviesRepository.find({
-      relations: ['genres', 'rooms'],
+      relations: ['genres',],
     });
   }
 
@@ -82,4 +85,5 @@ export class MoviesService {
 
     return await this.moviesRepository.remove(movie);
   }
+  
 }

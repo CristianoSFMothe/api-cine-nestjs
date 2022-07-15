@@ -6,16 +6,8 @@ import { Column, Entity,  ManyToOne} from 'typeorm';
 @Entity({ name: 'sessions' })
 export class Session extends BaseEntity {
   @Column()
-  exhibition: string;
-
-  // TODO ManyToOne 
+  exhibition: string;  
 
   @ManyToOne(() => Room, (room: Room) => room.sessions)
   rooms: Room;
-
-  // @Column()
-  // priceId: string;
-
-  // @Column()
-  // comboId: string;
 }

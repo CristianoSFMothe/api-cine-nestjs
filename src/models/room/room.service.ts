@@ -42,7 +42,7 @@ export class RoomService {
     const room = await this.roomRepository.findOne({ where: { id: id } });
 
     if (!room) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.MOVIE_NOT_FOUND);
     }
 
     return room;
@@ -52,7 +52,7 @@ export class RoomService {
     const room = await this.roomRepository.preload({ id, ...updateRoomDto });
 
     if (!room) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.MOVIE_NOT_FOUND);
     }
 
     return await this.roomRepository.save(room);
@@ -62,7 +62,7 @@ export class RoomService {
     const room = await this.roomRepository.findOne({ where: { id: id } });
 
     if (!room) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.MOVIE_NOT_FOUND);
     }
 
     return await this.roomRepository.remove(room);
