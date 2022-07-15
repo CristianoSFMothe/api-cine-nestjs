@@ -1,3 +1,4 @@
+import { Session } from './../sessions/entities/session.entity';
 import { Room } from './../room/entities/room.entity';
 import { Genre } from './../genre/entities/genre.entity';
 import { Movie } from './entities/movie.entity';
@@ -7,7 +8,7 @@ import { MoviesService } from './movies.service';
 import { MoviesController } from './movies.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Movie, Genre, Room])],
+  imports: [TypeOrmModule.forFeature([Movie, Genre, Room, Session])],
   controllers: [MoviesController],
   providers: [MoviesService],
   exports: [MoviesService],
