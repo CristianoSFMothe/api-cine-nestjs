@@ -8,5 +8,5 @@ export class CreatePriceDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  findOut: number;
+  fullPrice: number;
 }

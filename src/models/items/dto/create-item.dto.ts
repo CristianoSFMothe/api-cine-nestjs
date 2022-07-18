@@ -9,8 +9,4 @@ export class CreateItemDto {
   @ApiProperty()
   @IsNotEmpty()
   price: number;
-  
-  @ApiProperty()
-  @IsNotEmpty()
-  description: string;
 }

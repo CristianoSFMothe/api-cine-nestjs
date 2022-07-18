@@ -12,10 +12,10 @@ export class Price extends BaseEntity {
   halfPrice: number;
 
   @Column({
-    name: 'entire_entryt',
+    name: 'full_price',
     type: 'decimal',
     precision: 10,
     scale: 2,
   })
-  entireEntry: number;
+  fullPrice: number;
 }
