@@ -35,7 +35,7 @@ export class MoviesService {
   async findOne(id: string): Promise<Movie> {
     const movie = await this.moviesRepository.findOne({
       where: { id: id },
-      relations: ['genres', 'rooms'],
+      relations: ['genres'],
     });
 
     if (!movie) {
@@ -47,6 +47,12 @@ export class MoviesService {
 
   async create(data: CreateMovieDto): Promise<Movie> {
     const movie = this.moviesRepository.create(data);
+
+    const movieExists = await this.moviesRepository.findOne({ id: movie.id });
+
+    if (movieExists) {
+      throw new NotFoundException(MessagesHelper.MOVIE_EXISTS);
+    }
 
     movie.genres = await this.genreRepository.findByIds(data.genres);
 

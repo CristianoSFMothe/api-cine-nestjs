@@ -1,3 +1,4 @@
+import { Item } from './../../items/entities/item.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
@@ -12,5 +13,5 @@ export class CreateComboDto {
   
   @ApiProperty()
   @IsNotEmpty()
-  itemId: string;
+  items: Item[];
 }

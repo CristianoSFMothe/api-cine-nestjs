@@ -1,19 +1,36 @@
+import { Item } from './../items/entities/item.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateComboDto } from './dto/create-combo.dto';
 import { UpdateComboDto } from './dto/update-combo.dto';
 import { Combo } from './entities/combo.entity';
+import lodash from 'lodash';
 
 @Injectable()
 export class CombosService {
   constructor(
     @InjectRepository(Combo)
     private readonly comboRepository: Repository<Combo>,
+
+    @InjectRepository(Item)
+    private readonly itemRepository: Repository<Item>,
   ) {}
 
-  async create(createComboDto: CreateComboDto): Promise<Combo> {
-    const combo = this.comboRepository.create(createComboDto);
+  async create(data: CreateComboDto): Promise<Combo> {
+    const combo = this.comboRepository.create(data);
+
+    const item = this.itemRepository.create(data);
+
+    combo.items = await this.itemRepository.findByIds(data.items);
+
+    const itemExists = await this.itemRepository.findOne({
+      where: { id: item.id },
+    });
+
+    if (itemExists) {
+      throw new NotFoundException();
+    }
 
     return await this.comboRepository.save(combo);
   }

@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 import { BaseEntity } from './../../../common/base/base-entity';
-@Entity({ name: 'tiket'})
+@Entity({ name: 'ticket'})
 export class Ticket extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2})
   descont: number;
@@ -8,9 +8,9 @@ export class Ticket extends BaseEntity {
   @Column()
   description: string;
 
-  @Column()
-  priceId: string;
+  // @Column()
+  // priceId: string;
 
-  @Column()
-  movieId: string;
+  // @Column()
+  // movieId: string;
 }

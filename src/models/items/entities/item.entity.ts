@@ -1,11 +1,18 @@
+import { Combo } from './../../combos/entities/combo.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({ name: 'items' })
 export class Item extends BaseEntity {
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
+
+  @Column({ type: 'integer' })
+  quantity: number;
+
+  @ManyToOne(() => Combo, (combo: Combo) => combo.items)
+  itemCombo: Combo;
 }

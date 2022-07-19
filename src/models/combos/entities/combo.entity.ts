@@ -1,5 +1,6 @@
+import { Item } from './../../items/entities/item.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'combos' })
 export class Combo extends BaseEntity {
@@ -9,6 +10,6 @@ export class Combo extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
-  @Column()
-  itemId: string;
+  @OneToMany(() => Item, (item: Item) => item.itemCombo, { cascade: true })
+  items: Item[];
 }

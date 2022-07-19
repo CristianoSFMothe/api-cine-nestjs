@@ -10,9 +10,9 @@ export class CreateTicketDto {
   @IsString()
   description: string;
 
-  @ApiProperty()
-  priceId: string;
+  // @ApiProperty()
+  // priceId: string;
 
-  @ApiProperty()
-  movieId: string;
+  // @ApiProperty()
+  // movieId: string;
 }
