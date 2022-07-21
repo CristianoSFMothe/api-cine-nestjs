@@ -1,6 +1,5 @@
+import { Genre } from './../genres/entities/genre.entity';
 import { Room } from './../room/entities/room.entity';
-import AppError from '../../common/AppError/AppError';
-import { Genre } from './../genre/entities/genre.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessagesHelper } from '../../common/messages/messages.helper';

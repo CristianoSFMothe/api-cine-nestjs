@@ -1,3 +1,4 @@
+import { GenreModule } from './models/genres/genres.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './configs/typeorm.config';
@@ -7,7 +8,6 @@ import { RoomModule } from './models/room/room.module';
 import { ItemsModule } from './models/items/items.module';
 import { CombosModule } from './models/combos/combos.module';
 import { SessionsModule } from './models/sessions/sessions.module';
-import { GenreModule } from './models/genre/genre.module';
 import { TicketModule } from './models/ticket/ticket.module';
 
 @Module({

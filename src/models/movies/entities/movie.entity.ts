@@ -1,6 +1,6 @@
+import { Genre } from './../../genres/entities/genre.entity';
 import { TypeMovie } from './../../../common/enums/TypeMovie-enum';
 import { Room } from './../../room/entities/room.entity';
-import { Genre } from './../../genre/entities/genre.entity';
 import { BaseEntity } from '../../../common/base/base-entity';
 import { Classification } from '../../../common/enums/Classification-enum';
 import {
@@ -44,11 +44,9 @@ export class Movie extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Genre, (genre: Genre) => genre.movies, { cascade: true })
-  @JoinTable()
+  @JoinTable({ name: 'genres_id' })
   genres: Genre[];
 
-  // TODO: Trocar aqui para OneToMany
-  @OneToMany(() => Room, (room: Room) => room.movies)
-  @JoinColumn()
+  @OneToMany(() => Room, (room: Room) => room.movies, { cascade: true })
   rooms: Room[];
 }

@@ -1,6 +1,6 @@
+import { Genre } from './../../genres/entities/genre.entity';
 import { TypeMovie } from './../../../common/enums/TypeMovie-enum';
 import { Room } from './../../room/entities/room.entity';
-import { Genre } from './../../genre/entities/genre.entity';
 import { Classification } from '../../../common/enums/Classification-enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';

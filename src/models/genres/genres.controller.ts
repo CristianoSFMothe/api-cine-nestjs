@@ -6,16 +6,15 @@ import {
   Patch,
   Param,
   Delete,
-  Put,
 } from '@nestjs/common';
-import { GenreService } from './genre.service';
+import { GenreService } from './genres.service';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Genre } from './entities/genre.entity';
 
 @ApiTags('Gêneros')
-@Controller('api/genre')
+@Controller('api/genres')
 export class GenreController {
   constructor(private readonly genreService: GenreService) {}
 
@@ -34,7 +33,7 @@ export class GenreController {
     return this.genreService.findOne(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updateGenreDto: UpdateGenreDto,

@@ -1,4 +1,4 @@
-import { MessagesHelper } from './../../common/messages/messages.helper';
+import { MessagesHelper } from '../../common/messages/messages.helper';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import AppError from 'src/common/AppError/AppError';
