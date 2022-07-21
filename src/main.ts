@@ -16,6 +16,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+  
   const config = new DocumentBuilder()
     .setTitle('NestJs API')
     .setDescription('The description of the API')
