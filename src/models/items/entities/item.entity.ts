@@ -13,7 +13,10 @@ export class Item extends BaseEntity {
   @Column({ type: 'integer' })
   quantity: number;
 
-  @ManyToOne(() => Combo, (combo: Combo) => combo.items)
+  @ManyToOne(() => Combo, (combo: Combo) => combo.items, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'combo_id' })
   itemCombo: Combo;
 }

@@ -108,6 +108,6 @@ export class CombosService {
       throw new NotFoundException();
     }
 
-    return await this.comboRepository.softRemove(combo);
+    return await this.comboRepository.remove(combo);
   }
 }
