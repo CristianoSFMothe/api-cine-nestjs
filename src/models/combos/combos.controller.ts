@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Put,
+  Patch,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CombosService } from './combos.service';
@@ -33,12 +34,12 @@ export class CombosController {
     return this.combosService.findOne(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateComboDto: UpdateComboDto,
+    @Body() data: UpdateComboDto,
   ): Promise<Combo> {
-    return this.combosService.update(id, updateComboDto);
+    return this.combosService.update(id, data);
   }
 
   @Delete(':id')

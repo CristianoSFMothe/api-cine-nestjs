@@ -14,11 +14,11 @@ export class GenreService {
     private readonly genreRepository: Repository<Genre>,
   ) {}
 
-  async create(createGenreDto: CreateGenreDto): Promise<Genre> {
-    const genre = this.genreRepository.create(createGenreDto);
+  async create(data: CreateGenreDto): Promise<Genre> {
+    const genre = this.genreRepository.create(data);
 
     const genreExists = await this.genreRepository.findOne({
-      type: createGenreDto.type,
+      where: { id: genre.id },
     });
 
     if (genreExists) {
@@ -42,8 +42,8 @@ export class GenreService {
     return genre;
   }
 
-  async update(id: string, updateGenreDto: UpdateGenreDto): Promise<Genre> {
-    const genre = await this.genreRepository.preload({ id, ...updateGenreDto });
+  async update(id: string, data: UpdateGenreDto): Promise<Genre> {
+    const genre = await this.genreRepository.preload({ id, ...data });
 
     if (!genre) {
       throw new NotFoundException();

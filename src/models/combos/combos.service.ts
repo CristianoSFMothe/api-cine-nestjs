@@ -61,7 +61,7 @@ export class CombosService {
 
     // console.log(sum);
 
-    let comboSave = await this.comboRepository.save(combo);   
+    let comboSave = await this.comboRepository.save(combo);
 
     let somatoria = 0;
 
@@ -71,7 +71,7 @@ export class CombosService {
 
     comboSave.price = somatoria;
 
-    return comboSave;
+    return await this.comboRepository.save(combo);
   }
 
   async findAll(): Promise<Combo[]> {
@@ -79,7 +79,10 @@ export class CombosService {
   }
 
   async findOne(id: string): Promise<Combo> {
-    const combo = await this.comboRepository.findOne({ where: { id: id } });
+    const combo = await this.comboRepository.findOne({
+      where: { id: id },
+      relations: ['items'],
+    });
 
     if (!combo) {
       throw new NotFoundException();
@@ -88,14 +91,10 @@ export class CombosService {
     return combo;
   }
 
-  async update(id: string, updateComboDto: UpdateComboDto): Promise<Combo> {
-    const combo = await this.comboRepository.preload({ id, ...updateComboDto });
+  async update(id: string, data: UpdateComboDto): Promise<Combo> {
+    const combo = await this.comboRepository.preload({ id, ...data });   
 
-    const comboExists = await this.comboRepository.findOne({
-      where: { id: id },
-    });
-
-    if (comboExists) {
+    if (!combo) {
       throw new NotFoundException();
     }
 
@@ -109,6 +108,6 @@ export class CombosService {
       throw new NotFoundException();
     }
 
-    return await this.comboRepository.remove(combo);
+    return await this.comboRepository.softRemove(combo);
   }
 }
