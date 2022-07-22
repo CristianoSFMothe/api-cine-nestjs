@@ -1,16 +1,28 @@
-import { Column, Entity } from 'typeorm';
+import { Session } from './../../sessions/entities/session.entity';
+import { Combo } from './../../combos/entities/combo.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { BaseEntity } from './../../../common/base/base-entity';
-@Entity({ name: 'ticket'})
+@Entity({ name: 'ticket' })
 export class Ticket extends BaseEntity {
-  @Column({ type: 'decimal', precision: 10, scale: 2})
-  descont: number;
-
   @Column()
   description: string;
 
-  // @Column()
-  // priceId: string;
+  @OneToOne(() => Session, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'session_id', referencedColumnName: 'id' })
+  session: Session;
 
-  // @Column()
-  // movieId: string;
+  // @OneToMany(() => Session, (session: Session) => session.ticket, { cascade: true })
+  // sessions: Session[];
+
+  @OneToMany(() => Combo, (combo: Combo) => combo.ticket, { cascade: true })
+  combos: Combo[];
 }

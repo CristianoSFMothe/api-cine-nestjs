@@ -1,6 +1,7 @@
+import { Ticket } from './../../ticket/entities/ticket.entity';
 import { Room } from './../../room/entities/room.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity({ name: 'sessions' })
 export class Session extends BaseEntity {
@@ -9,5 +10,12 @@ export class Session extends BaseEntity {
 
   @ManyToOne(() => Room, (room: Room) => room.sessions)
   @JoinColumn({ name: 'rooms_id' })
-  rooms: Room;
+  rooms: Room;  
+
+  // @ManyToOne(() => Ticket, (ticket: Ticket) => ticket.session)
+  // tickets: Ticket;
+
+  // @ManyToOne(() => Ticket, (ticket: Ticket) => ticket.sessions)
+  // @JoinColumn({ name: 'ticket_id' })
+  // ticket: Ticket;
 }

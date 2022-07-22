@@ -32,35 +32,6 @@ export class CombosService {
       throw new NotFoundException();
     }
 
-    const items = [];
-
-    // const result = items
-    //   .map((item) => item.price)
-    //   .reduce((acc, total) => {
-    //     return acc + total * item.quantity;
-    //   });
-    // console.log(result);
-
-    // const items = [];
-
-    // var total = items.reduce((item) => {
-    //   return total + item.price * item.quantity;
-    // });
-
-    // console.log(total);
-
-    // for (const item of combo.items) {
-    //   const itemItem = await this.itemRepository.findOne({
-    //     where: { item: item.price },
-    //   });
-    // }
-
-    // items.forEach((items) => {});
-
-    // let sum = items.reduce((accumulator, item) => accumulator + item.price, 0);
-
-    // console.log(sum);
-
     let comboSave = await this.comboRepository.save(combo);
 
     let somatoria = 0;

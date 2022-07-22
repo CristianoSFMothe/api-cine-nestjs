@@ -34,4 +34,9 @@ export class TicketController {
   remove(@Param('id') id: string): Promise<Ticket> {
     return this.ticketService.remove(id);
   }
+
+  @Get(':allSession/:id')
+  async findAllMovie(@Param('id') id: string) {
+    return this.ticketService.findAllTicket(id);
+  }
 }

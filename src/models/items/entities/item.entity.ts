@@ -14,7 +14,7 @@ export class Item extends BaseEntity {
   quantity: number;
 
   @ManyToOne(() => Combo, (combo: Combo) => combo.items, {
-    onDelete: 'CASCADE',
+    onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'combo_id' })
