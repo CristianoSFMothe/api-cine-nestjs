@@ -36,5 +36,5 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  classification: string[];
+  readonly classification: string[];
 }

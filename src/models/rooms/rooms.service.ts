@@ -27,14 +27,6 @@ export class RoomsService {
 
     room.sessions = await this.sessionModel.findByIds(data.sessions);
 
-    // const sessionExists = await this.sessionModel.findOne({
-    //   where: { id: data.sessions },
-    // });
-
-    // if (!sessionExists) {
-    //   throw new NotFoundException(MessagesHelper.SESSION_NOT_FOUND);
-    // }
-
     const roomExists = await this.roomsModel.findOne({
       name: data.name,
     });

@@ -16,11 +16,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> parent of b0d161d (feat: refatoracao total do projeto)
   const config = new DocumentBuilder()
     .setTitle('NestJs API')
     .setDescription('The description of the API')
@@ -30,10 +25,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('api', app, document);
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of b0d161d (feat: refatoracao total do projeto)
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

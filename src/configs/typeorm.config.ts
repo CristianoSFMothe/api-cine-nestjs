@@ -4,20 +4,12 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
-<<<<<<< HEAD
   type: 'postgres',
-=======
-  type: 'mariadb',
->>>>>>> parent of b0d161d (feat: refatoracao total do projeto)
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
-<<<<<<< HEAD
   synchronize: true,
-=======
-  synchronize: false,
->>>>>>> parent of b0d161d (feat: refatoracao total do projeto)
 };
