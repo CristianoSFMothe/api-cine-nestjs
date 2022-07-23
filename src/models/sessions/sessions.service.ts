@@ -22,16 +22,6 @@ export class SessionsService {
 
   async createSession(data: CreateSessionDto): Promise<Session> {
     const session = this.sessionsRepository.create(data);
-    
-    // session.rooms = await this.roonsRepository.findByIds(data.rooms);
-
-    // const roomExists = await this.sessionsRepository.findOne({
-    //   where: { roomId: data.roomId },
-    // });
-
-    // if (!roomExists) {
-    //   throw new NotFoundException();
-    // }
 
     const sessionExists = await this.sessionsRepository.findOne({
       id: session.id,

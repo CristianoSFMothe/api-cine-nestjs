@@ -1,7 +1,7 @@
 import { Combo } from './../../combos/entities/combo.entity';
 import { Session } from './../../sessions/entities/session.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateTicketDto {
   @ApiProperty()
