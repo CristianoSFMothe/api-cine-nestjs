@@ -41,3 +41,7 @@ lerna-debug.log*
 ormconfig.js
 
 NOTE.md
+
+docker-compose.yml
+
+ormconfig.ts
