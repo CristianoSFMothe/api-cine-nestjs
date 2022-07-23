@@ -1,5 +1,4 @@
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Classification } from './../../../common/enum/classification.enum';
 import { Column, Entity } from 'typeorm';
 
 @Entity({ name: 'movie' })
@@ -10,21 +9,33 @@ export class Movie extends BaseEntity {
   @Column({ type: 'text' })
   description: string;
 
-  @Column('json', { name: 'film_cast', nullable: false })
+  @Column({
+    type: 'jsonb',
+    nullable: false,
+  })
   filmCast: string[];
 
-  @Column('json', { nullable: false })
+  @Column({
+    type: 'jsonb',
+    nullable: false,
+  })
   direction: string[];
 
   @Column({ type: 'int' })
   recommendation: number;
 
-  @Column('json', { nullable: false })
+  @Column({
+    type: 'jsonb',
+    nullable: false,
+  })
   genre: string[];
 
   @Column({ type: 'int' })
   duration: number;
 
-  @Column('json', { nullable: false })
+  @Column({
+    type: 'jsonb',
+    nullable: false,
+  })
   classification: string[];
 }

@@ -1,14 +1,5 @@
-import { TypeMovie } from './../../../common/enum/type-movie.enum';
-import { Classification } from './../../../common/enum/classification.enum';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  Max,
-  MaxLength,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Max } from 'class-validator';
 export class CreateMovieDto {
   @ApiProperty()
   @IsString()
@@ -45,5 +36,5 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  readonly classification: string[];
+  classification: string[];
 }
