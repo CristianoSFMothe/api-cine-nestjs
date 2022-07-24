@@ -11,5 +11,7 @@ export const MessagesHelper = {
 
   GENRE_IS_EXISTING: 'Já existe esse gênero.',
 
-  PRICE_NOT_FOUND: 'Não possível localizar a pesquisa.',
+  ITEM_NOT_FOUND: 'Não possível localizar a nenhum item cadastrado.',
+
+  COMBO_NOT_FOUND: 'Não possível localizar a nenhum combo cadastrado.',
 };
