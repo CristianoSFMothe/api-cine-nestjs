@@ -1,5 +1,6 @@
+import { Room } from './../../rooms/entities/room.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'movie' })
 export class Movie extends BaseEntity {
@@ -38,4 +39,10 @@ export class Movie extends BaseEntity {
     nullable: false,
   })
   classification: string[];
+
+  @OneToMany(() => Room, (room: Room) => room.movies, {
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
+  rooms: Room[];
 }

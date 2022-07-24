@@ -46,4 +46,9 @@ export class MovieController {
   remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.movieService.removeMovie(id);
   }
+
+  @Get(':movieFull/:id')
+  async findAllMovie(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.movieService.findMovieFull(id);
+  }
 }

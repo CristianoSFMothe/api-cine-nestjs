@@ -1,6 +1,7 @@
+import { Movie } from './../../movie/entities/movie.entity';
 import { Session } from './../../sessions/entities/session.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 export enum TypeRoom {
   TWO_D = 'TWO_D',
@@ -32,4 +33,8 @@ export class Room extends BaseEntity {
   })
   @JoinColumn({ name: 'session_id', referencedColumnName: 'id' })
   sessions: Session[];
+
+  @ManyToOne(() => Movie, (movie: Movie) => movie.rooms, { cascade: true })
+  @JoinColumn({ name: 'movie_id' })
+  movies: Movie;
 }

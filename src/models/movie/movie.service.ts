@@ -1,3 +1,4 @@
+import { Room } from './../rooms/entities/room.entity';
 import { Movie } from './entities/movie.entity';
 import {
   HttpException,
@@ -16,6 +17,9 @@ export class MovieService {
   constructor(
     @InjectRepository(Movie)
     private readonly movieModel: Repository<Movie>,
+
+    @InjectRepository(Room)
+    private readonly roomModel: Repository<Room>,
   ) {}
 
   async createMovie(data: CreateMovieDto): Promise<Movie> {
@@ -28,6 +32,8 @@ export class MovieService {
     if (movieExist) {
       throw new NotFoundException(MessagesHelper.MOVIE_EXISTS);
     }
+
+    movie.rooms = await this.roomModel.findByIds(data.rooms);
 
     return await this.movieModel.save(movie);
   }
@@ -83,5 +89,30 @@ export class MovieService {
     }
 
     await this.movieModel.softDelete(id);
+  }
+
+  async findMovieFull(id: string) {
+    const movie = await this.movieModel.findOneOrFail({ where: { id: id } });
+
+    const room = [];
+
+    const roomModel = await this.roomModel.find({
+      relations: ['sessions'],
+      where: { movies: movie.id },
+    });
+
+    room.push(roomModel);
+
+    return {
+      movie: {
+        id: movie.id,
+        title: movie.title,
+        recommendation: movie.recommendation,
+        classification: movie.classification,
+        duration: movie.duration,
+        description: movie.description,
+        room: room,
+      },
+    };
   }
 }

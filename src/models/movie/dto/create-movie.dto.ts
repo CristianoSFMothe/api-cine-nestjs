@@ -1,3 +1,4 @@
+import { Room } from './../../rooms/entities/room.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, Max } from 'class-validator';
 export class CreateMovieDto {
@@ -37,4 +38,8 @@ export class CreateMovieDto {
   @ApiProperty()
   @IsNotEmpty()
   readonly classification: string[];
+
+  @ApiProperty()
+  @IsNotEmpty()
+  readonly rooms: Room[];
 }
