@@ -53,7 +53,7 @@ export class CombosService {
   async show(): Promise<Combo[]> {
     const combo = await this.comboModel.find();
 
-    if (combo.length > 0) {
+    if (combo.length < 1) {
       throw new HttpException(
         MessagesHelper.COMBO_NOT_FOUND,
         HttpStatus.NOT_FOUND,

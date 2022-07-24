@@ -1,3 +1,4 @@
+import { Room } from './../rooms/entities/room.entity';
 import { Session } from './entities/session.entity';
 import { Repository } from 'typeorm';
 import {
@@ -16,6 +17,9 @@ export class SessionsService {
   constructor(
     @InjectRepository(Session)
     private readonly sessionModel: Repository<Session>,
+
+    @InjectRepository(Room)
+    private readonly roomModel: Repository<Room>,
   ) {}
 
   async createSession(data: CreateSessionDto): Promise<Session> {
@@ -47,6 +51,7 @@ export class SessionsService {
 
   async findById(id: string): Promise<Session> {
     const session = await this.sessionModel.findOneOrFail({
+      relations: ['rooms'],
       where: { id: id },
     });
 

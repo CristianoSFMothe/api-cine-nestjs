@@ -14,4 +14,8 @@ export const MessagesHelper = {
   ITEM_NOT_FOUND: 'Não possível localizar a nenhum item cadastrado.',
 
   COMBO_NOT_FOUND: 'Não possível localizar a nenhum combo cadastrado.',
+
+  TICKET_NOT_FOUND: 'Não encontrado nenhum ingresso.',
+
+  SESSION_INVALID: 'Sessão já utilizada.',
 };

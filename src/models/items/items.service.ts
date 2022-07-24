@@ -34,7 +34,7 @@ export class ItemsService {
   async show(): Promise<Item[]> {
     const item = await this.itemModel.find();
 
-    if (item.length > 0) {
+    if (item.length < 1) {
       throw new HttpException(
         MessagesHelper.ITEM_NOT_FOUND,
         HttpStatus.NOT_FOUND,
