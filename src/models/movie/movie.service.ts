@@ -107,10 +107,13 @@ export class MovieService {
       movie: {
         id: movie.id,
         title: movie.title,
+        description: movie.description,
+        filmCast: movie.filmCast,
+        direction: movie.direction,
         recommendation: movie.recommendation,
+        genre: movie.genre,
         classification: movie.classification,
         duration: movie.duration,
-        description: movie.description,
         room: room,
       },
     };
