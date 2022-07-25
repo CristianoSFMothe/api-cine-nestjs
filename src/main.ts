@@ -16,8 +16,9 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
   const config = new DocumentBuilder()
-    .setTitle('NestJs API')
+    .setTitle('NestJs Cine API')
     .setDescription('The description of the API')
     .setVersion('1.0.0')
     .build();

@@ -1,5 +1,5 @@
 import { Item } from './../../items/entities/item.entity';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsDecimal, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateComboDto {
@@ -11,7 +11,7 @@ export class CreateComboDto {
   @IsNotEmpty()
   price: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNotEmpty()
   items: Item[];
 }
