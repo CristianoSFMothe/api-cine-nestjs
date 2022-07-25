@@ -48,7 +48,7 @@ export class TicketsService {
   }
 
   async show(): Promise<Ticket[]> {
-    const ticket = await this.ticketModel.find();
+    const ticket = await this.ticketModel.find({ relations: ['session'] });
 
     if (ticket.length < 1) {
       throw new HttpException(
@@ -60,7 +60,10 @@ export class TicketsService {
   }
 
   async findById(id: string): Promise<Ticket> {
-    const ticket = await this.ticketModel.findOneOrFail({ where: { id: id } });
+    const ticket = await this.ticketModel.findOneOrFail({
+      relations: ['session'],
+      where: { id: id },
+    });
 
     if (!ticket) {
       throw new NotFoundException(MessagesHelper.TICKET_NOT_FOUND);
