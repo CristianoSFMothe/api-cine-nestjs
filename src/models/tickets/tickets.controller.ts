@@ -1,3 +1,5 @@
+import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedTicketSwagger } from './../../common/swagger/Ticket/update-ticket.swagger';
 import { FindByIdTicketSwagger } from './../../common/swagger/Ticket/findById-ticket.swagger';
 import { ShowTicketSwagger } from './../../common/swagger/Ticket/show-ticket.swagger';
@@ -54,7 +56,11 @@ export class TicketsController {
     description: 'Dados de um ingresso retornando com sucesso',
     type: FindByIdTicketSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Ingresso não foi encontrado.' })
+  @ApiResponse({
+    status: 404,
+    description: 'Ingresso não foi encontrado.',
+    type: NotFoundSwagger,
+  })
   findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<Ticket> {
     return this.ticketsService.findById(id);
   }
@@ -66,7 +72,16 @@ export class TicketsController {
     description: 'Ingresso atualizado com sucesso',
     type: UpdatedTicketSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Ingresso não foi encontrado' })
+  @ApiResponse({
+    status: 400,
+    description: 'Pâramentros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Ingresso não foi encontrado',
+    type: NotFoundSwagger,
+  })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() data: UpdateTicketDto,
@@ -77,7 +92,11 @@ export class TicketsController {
   @Delete(':id')
   @ApiOperation({ summary: 'Exclusão de uma ingresso por ID' })
   @ApiResponse({ status: 204, description: 'Ingresso removido com sucesso' })
-  @ApiResponse({ status: 404, description: 'Ingresso não foi encontrado' })
+  @ApiResponse({
+    status: 404,
+    description: 'Ingresso não foi encontrado',
+    type: NotFoundSwagger,
+  })
   remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.ticketsService.remove(id);
   }

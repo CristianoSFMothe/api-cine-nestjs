@@ -1,3 +1,5 @@
+import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedSessionSwagger } from './../../common/swagger/Session/update-session.swagger';
 import { FindByIdSessionSwagger } from './../../common/swagger/Session/findById-session.swagger';
 import { ShowSessionSwagger } from './../../common/swagger/Session/show-session.swagger';
@@ -54,7 +56,11 @@ export class SessionsController {
     description: 'Dados de um sessão retornando com sucesso',
     type: FindByIdSessionSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Sessão não foi encontrado.' })
+  @ApiResponse({
+    status: 404,
+    description: 'Sessão não foi encontrado.',
+    type: NotFoundSwagger,
+  })
   findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<Session> {
     return this.sessionsService.findById(id);
   }
@@ -66,7 +72,16 @@ export class SessionsController {
     description: 'Sessão atualizado com sucesso',
     type: UpdatedSessionSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Sessão não foi encontrado' })
+  @ApiResponse({
+    status: 400,
+    description: 'Pâramentros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Sessão não foi encontrado',
+    type: NotFoundSwagger,
+  })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateSessionDto: UpdateSessionDto,
@@ -77,7 +92,11 @@ export class SessionsController {
   @Delete(':id')
   @ApiOperation({ summary: 'Exclusão de uma Sessão por ID' })
   @ApiResponse({ status: 204, description: 'Sesão removido com sucesso' })
-  @ApiResponse({ status: 404, description: 'Sesão não foi encontrado' })
+  @ApiResponse({
+    status: 404,
+    description: 'Sesão não foi encontrado',
+    type: NotFoundSwagger,
+  })
   remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.sessionsService.remove(id);
   }

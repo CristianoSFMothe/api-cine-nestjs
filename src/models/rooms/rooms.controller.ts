@@ -1,3 +1,5 @@
+import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedRoomSwagger } from '../../common/swagger/Room/update-room.swagger';
 import { FindByIdRoomSwagger } from '../../common/swagger/Room/findById-room.swagger';
 import { ShowRoomSwagger } from '../../common/swagger/Room/show-room.swagger';
@@ -54,7 +56,11 @@ export class RoomsController {
     description: 'Dados de um sala retornando com sucesso',
     type: FindByIdRoomSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Sala não foi encontrado.' })
+  @ApiResponse({
+    status: 404,
+    description: 'Sala não foi encontrado.',
+    type: NotFoundSwagger,
+  })
   findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<Room> {
     return this.roomsService.findByid(id);
   }
@@ -66,7 +72,16 @@ export class RoomsController {
     description: 'Sala atualizado com sucesso',
     type: UpdatedRoomSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Sala não foi encontrado' })
+  @ApiResponse({
+    status: 400,
+    description: 'Pâramentros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Sala não foi encontrado',
+    type: NotFoundSwagger,
+  })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateRoomDto: UpdateRoomDto,
@@ -77,7 +92,11 @@ export class RoomsController {
   @Delete(':id')
   @ApiOperation({ summary: 'Exclusão de uma sala por ID' })
   @ApiResponse({ status: 204, description: 'Sala removido com sucesso' })
-  @ApiResponse({ status: 404, description: 'Sala não foi encontrado' })
+  @ApiResponse({
+    status: 404,
+    description: 'Sala não foi encontrado',
+    type: NotFoundSwagger,
+  })
   remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.roomsService.remove(id);
   }

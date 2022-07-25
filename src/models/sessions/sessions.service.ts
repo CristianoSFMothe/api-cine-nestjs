@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
-import { MessagesHelper } from 'src/common/messages/messages.helper';
+import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()

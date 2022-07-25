@@ -1,3 +1,5 @@
+import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { FindFullMovieSwagger } from './../../common/swagger/Movie/findFull-movie.swagger';
 import { UpdatedMovieSwagger } from './../../common/swagger/Movie/update-movie.swagger';
 import { FindByIdMovieSwagger } from './../../common/swagger/Movie/findById-movie.swagger';
@@ -55,7 +57,11 @@ export class MovieController {
     description: 'Dados de um filme retornando com sucesso',
     type: FindByIdMovieSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Filme não foi encontrado.' })
+  @ApiResponse({
+    status: 404,
+    description: 'Filme não foi encontrado.',
+    type: NotFoundSwagger,
+  })
   findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<Movie> {
     return this.movieService.findById(id);
   }
@@ -67,7 +73,16 @@ export class MovieController {
     description: 'Filme atualizado com sucesso',
     type: UpdatedMovieSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Filme não foi encontrado' })
+  @ApiResponse({
+    status: 400,
+    description: 'Pâramentros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Filme não foi encontrado',
+    type: NotFoundSwagger,
+  })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateMovieDto: UpdateMovieDto,
@@ -78,7 +93,11 @@ export class MovieController {
   @Delete(':id')
   @ApiOperation({ summary: 'Exclusão de um filme por ID' })
   @ApiResponse({ status: 204, description: 'Filme removido com sucesso' })
-  @ApiResponse({ status: 404, description: 'Filme não foi encontrado' })
+  @ApiResponse({
+    status: 404,
+    description: 'Filme não foi encontrado',
+    type: NotFoundSwagger,
+  })
   remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.movieService.removeMovie(id);
   }
@@ -90,7 +109,11 @@ export class MovieController {
     description: 'Dados de um filme retornando com sucesso',
     type: FindFullMovieSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Filme não foi encontrado.' })
+  @ApiResponse({
+    status: 404,
+    description: 'Filme não foi encontrado.',
+    type: NotFoundSwagger,
+  })
   @ApiOperation({
     summary: 'Lista todas a informações de um filme especifíco por ID',
   })

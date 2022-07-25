@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
-import { MessagesHelper } from '../../common/messages/messages.helper';
+import { MessagesHelper } from '../../common/helpers/messages/messages.helper';
 
 @Injectable()
 export class MovieService {

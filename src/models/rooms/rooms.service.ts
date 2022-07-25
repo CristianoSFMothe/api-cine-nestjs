@@ -1,4 +1,4 @@
-import { MessagesHelper } from 'src/common/messages/messages.helper';
+import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { Session } from './../sessions/entities/session.entity';
 import { Room } from './entities/room.entity';
 import {

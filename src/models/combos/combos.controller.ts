@@ -1,3 +1,5 @@
+import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedComboSwagger } from './../../common/swagger/Combo/update-combo.swagger';
 import { FindByIdComboSwagger } from './../../common/swagger/Combo/findById-combo.swagger';
 import { ShowComboSwagger } from './../../common/swagger/Combo/show-combo.swagger';
@@ -24,7 +26,11 @@ export class CombosController {
 
   @Post()
   @ApiOperation({ summary: 'Criação de um combo' })
-  @ApiResponse({ status: 400, description: 'Pâramentros inválidos' })
+  @ApiResponse({
+    status: 400,
+    description: 'Pâramentros inválidos',
+    type: BadRequestSwagger,
+  })
   @ApiResponse({
     status: 201,
     description: 'Combo criado com sucesso',
@@ -53,7 +59,11 @@ export class CombosController {
     description: 'Dados de um combo retornando com sucesso',
     type: FindByIdComboSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Combo não foi encontrado.' })
+  @ApiResponse({
+    status: 404,
+    description: 'Combo não foi encontrado.',
+    type: NotFoundSwagger,
+  })
   findOne(@Param('id') id: string): Promise<Combo> {
     return this.combosService.findOne(id);
   }
@@ -65,7 +75,16 @@ export class CombosController {
     description: 'Combo atualizado com sucesso',
     type: UpdatedComboSwagger,
   })
-  @ApiResponse({ status: 404, description: 'Combo não foi encontrado' })
+  @ApiResponse({
+    status: 400,
+    description: 'Pâramentros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Combo não foi encontrado',
+    type: NotFoundSwagger,
+  })
   update(
     @Param('id') id: string,
     @Body() updateComboDto: UpdateComboDto,
@@ -76,7 +95,11 @@ export class CombosController {
   @Delete(':id')
   @ApiOperation({ summary: 'Exclusão de um combo por ID' })
   @ApiResponse({ status: 204, description: 'Combo removido com sucesso' })
-  @ApiResponse({ status: 404, description: 'Combo não foi encontrado' })
+  @ApiResponse({
+    status: 404,
+    description: 'Combo não foi encontrado',
+    type: NotFoundSwagger,
+  })
   remove(@Param('id') id: string): Promise<void> {
     return this.combosService.remove(id);
   }
