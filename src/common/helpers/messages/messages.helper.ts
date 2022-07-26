@@ -18,4 +18,6 @@ export const MessagesHelper = {
   TICKET_NOT_FOUND: 'Não encontrado nenhum ingresso.',
 
   SESSION_INVALID: 'Sessão já utilizada.',
+
+  SALE_NOT_FOUND: 'Não encontrado nenhuma venda.',
 };
