@@ -47,6 +47,12 @@ export class SalesService {
 
     saleSave.price = totalSale;
 
+    const returnThing = await this.saleModel.save(sale);
+
+    const thing = sale.payment - saleSave.price;
+
+    returnThing.thing = thing;
+
     return await this.saleModel.save(sale);
   }
 
