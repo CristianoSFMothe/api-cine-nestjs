@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { Combo } from './../combos/entities/combo.entity';
 import { Sale } from './entities/sale.entity';
@@ -22,38 +23,109 @@ export class SalesService {
     private readonly comboModel: Repository<Combo>,
   ) {}
 
-  async create(data: CreateSaleDto): Promise<Sale> {
-    const sale = this.saleModel.create(data);
+  async create(createSaleDto: CreateSaleDto): Promise<Sale> {
+    const saleEntity = new Sale();
 
-    const combo = this.comboModel.create(data);
+    saleEntity.combos = [];
+    saleEntity.thing = 0;
+    saleEntity.price = 0;
 
-    sale.combos = await this.comboModel.findByIds(data.combos);
-
-    const comboExists = await this.comboModel.findOne({
-      where: { id: combo.id },
+    createSaleDto.combos.forEach((comboItem) => {
+      const combo = new Combo();
+      combo.id = comboItem.id;
+      saleEntity.combos.push(combo);
     });
 
-    if (comboExists) {
-      throw new NotFoundException();
-    }
+    saleEntity.payment = createSaleDto.payment;
 
-    const saleSave = await this.saleModel.save(sale);
+    // return this.saleModel.create(createSaleDto);
 
-    let totalSale = 0;
+    const sale = await this.saleModel.save(saleEntity);
 
-    saleSave.combos.forEach((combo) => {
-      totalSale += combo.price * combo.quantity;
-    });
+    return sale;
 
-    saleSave.price = totalSale;
+    // return sale;
 
-    const returnThing = await this.saleModel.save(sale);
+    // const sale = this.saleModel.create(createSaleDto);
 
-    const thing = sale.payment - saleSave.price;
+    // const combo = this.comboModel.create(createSaleDto);
 
-    returnThing.thing = thing;
+    // sale.combos = await this.comboModel.findByIds(createSaleDto.combos);
 
-    return await this.saleModel.save(sale);
+    // const comboExists = await this.comboModel.findOne({
+    //   where: { id: combo.id },
+    // });
+
+    // if (comboExists) {
+    //   throw new NotFoundException();
+    // }
+
+    // // Calculo do valor do combo
+    // const saleSave = await this.saleModel.save(sale);
+
+    // let totalSale = 0;
+
+    // saleSave.combos.forEach((combo) => {
+    //   totalSale += Number(combo.price);
+    // });
+
+    // saleSave.price = totalSale;
+
+    // const data = await this.comboModel.findByIds(createSaleDto.combos);
+
+    // const comb = data.reduce((acc, { id, price }: Combo) => {
+    //   acc.set(id, (acc.has(id) ? acc.get(id) : 0) + Number(price));
+    //   return acc;
+    // }, new Map());
+
+    // console.log(comb);
+
+    // const thing = sale.payment - sale.price;
+
+    // console.log(`O trocor a ser dado é R$${thing}`);
+
+    // const soldComb = [];
+
+    // const comb = await this.comboModel.findByIds(createSaleDto.combos);
+
+    // let amout = 0;
+
+    // soldComb.forEach((item) => {
+    //   comb.forEach((ele) => {
+    //     if (ele.id === item) {
+    //       amout += ele.price;
+    //     }
+    //   });
+    // });
+
+    // console.log('Valor do amount é: ', amout);
+    // console.log('Valor do soldComb é: ', soldComb);
+    // console.log('Valor do comb é: ', comb);
+
+    // const saveThing = await this.saleModel.save(sale);
+
+    // const totalPrice = 0;
+
+    // const returnThing = await this.saleModel.findByIds(createSaleDto.combos);
+
+    // returnThing.forEach(() => {
+    //   const thing = sale.payment - saleSave.price;
+    //   return thing;
+    // });
+
+    // saveThing.combos.forEach((combo) => {
+    //   totalPrice += combo.price * Number(combo);
+    // });
+
+    // for (let i = 0; i < combo.id.length; i++) {}
+
+    // returnThing.push(combo.id)
+
+    // const response = await this.saleModel.save(sale);
+
+    // response.thing = thing;
+
+    // return await this.saleModel.save(sale);
   }
 
   async show(): Promise<Sale[]> {

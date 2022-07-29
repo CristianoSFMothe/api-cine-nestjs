@@ -11,10 +11,6 @@ export class CreateComboDto {
   @IsNotEmpty()
   price: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  quantity: number;
-
   @ApiPropertyOptional()
   @IsNotEmpty()
   items: Item[];
