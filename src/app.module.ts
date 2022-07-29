@@ -8,6 +8,7 @@ import { ItemsModule } from './models/items/items.module';
 import { CombosModule } from './models/combos/combos.module';
 import { TicketsModule } from './models/tickets/tickets.module';
 import { SalesModule } from './models/sales/sales.module';
+import { SalesComboModule } from './models/sales-combo/sales-combo.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SalesModule } from './models/sales/sales.module';
     CombosModule,
     TicketsModule,
     SalesModule,
+    SalesComboModule,
   ],
   controllers: [],
   providers: [],

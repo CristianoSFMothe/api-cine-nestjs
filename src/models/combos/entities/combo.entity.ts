@@ -1,3 +1,4 @@
+import { SalesCombo } from './../../sales-combo/entities/sales-combo.entity';
 // import { SalesCombo } from './../../sales/entities/sales-combo.entity';
 import { Sale } from './../../sales/entities/sale.entity';
 import { Item } from './../../items/entities/item.entity';
@@ -12,9 +13,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'combos' })
-export class Combo {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+export class Combo extends BaseEntity {
   @Column()
   name: string;
 
@@ -24,9 +23,9 @@ export class Combo {
   @OneToMany(() => Item, (item: Item) => item.itemCombo, { cascade: true })
   items: Item[];
 
-  @ManyToMany(() => Sale, (sale: Sale) => sale.combos)
-  sales: Sale[];
+  // @ManyToMany(() => Sale, (sale: Sale) => sale.combos)
+  // sales: Sale[];
 
-  // @OneToMany(() => SalesCombo, (salesCombo: SalesCombo) => salesCombo.combo)
-  // salesCombo: SalesCombo[];
+  @OneToMany(() => SalesCombo, (salesCombo) => salesCombo.combo)
+  salesCobo: SalesCombo[];
 }

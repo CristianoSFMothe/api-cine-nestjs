@@ -26,15 +26,15 @@ export class SalesService {
   async create(createSaleDto: CreateSaleDto): Promise<Sale> {
     const saleEntity = new Sale();
 
-    saleEntity.combos = [];
-    saleEntity.thing = 0;
-    saleEntity.price = 0;
+    // saleEntity.combos = [];
+    // saleEntity.thing = 0;
+    // saleEntity.price = 0;
 
-    createSaleDto.combos.forEach((comboItem) => {
-      const combo = new Combo();
-      combo.id = comboItem.id;
-      saleEntity.combos.push(combo);
-    });
+    // createSaleDto.combos.forEach((comboItem) => {
+    //   const combo = new Combo();
+    //   combo.id = comboItem.id;
+    //   saleEntity.combos.push(combo);
+    // });
 
     saleEntity.payment = createSaleDto.payment;
 

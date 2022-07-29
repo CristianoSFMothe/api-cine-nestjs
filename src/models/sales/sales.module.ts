@@ -1,3 +1,4 @@
+import { SalesCombo } from './../sales-combo/entities/sales-combo.entity';
 import { Combo } from './../combos/entities/combo.entity';
 import { Sale } from './entities/sale.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,7 +7,7 @@ import { SalesService } from './sales.service';
 import { SalesController } from './sales.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Sale, Combo])],
+  imports: [TypeOrmModule.forFeature([Sale, Combo, SalesCombo])],
   controllers: [SalesController],
   providers: [SalesService],
   exports: [SalesService],
