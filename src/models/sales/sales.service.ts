@@ -1,3 +1,5 @@
+import { SalesCombo } from 'src/models/sales/entities/sales-combo.entity';
+import { SalesModule } from './sales.module';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { Combo } from './../combos/entities/combo.entity';
@@ -21,28 +23,81 @@ export class SalesService {
 
     @InjectRepository(Combo)
     private readonly comboModel: Repository<Combo>,
+
+    @InjectRepository(SalesCombo)
+    private readonly salesComboModel: Repository<SalesCombo>,
   ) {}
 
-  async create(createSaleDto: CreateSaleDto): Promise<Sale> {
+  async create(data: CreateSaleDto): Promise<Sale> {
+    const sale = this.saleModel.create(data);
+
+    const combos = this.comboModel.create(data);
+
+    const saleModel = await this.saleModel.save(sale);
+
     const saleEntity = new Sale();
 
-    // saleEntity.combos = [];
-    // saleEntity.thing = 0;
-    // saleEntity.price = 0;
+    saleEntity.salesCombo = [];
 
-    // createSaleDto.combos.forEach((comboItem) => {
-    //   const combo = new Combo();
-    //   combo.id = comboItem.id;
-    //   saleEntity.combos.push(combo);
+    saleEntity.thing = 0;
+
+    saleEntity.price = 0;
+
+    for (let i = 0; i < data.combos.length; i++) {
+      const comboItem: Combo = data.combos[i];
+
+      const salesCombo = new SalesCombo();
+
+      salesCombo.combos = comboItem;
+
+      salesCombo.sales = saleModel;
+
+      const salesCombos = this.salesComboModel.create(salesCombo);
+
+      await this.salesComboModel.save(salesCombos);
+    }
+
+    const salesComboModel = await this.salesComboModel.find({
+      relations: ['combos'],
+      where: { sales: { id: saleModel.id } },
+    });
+
+    console.log('Estou aqui', salesComboModel);
+
+    // saleEntity.payment = data.payment;
+
+    const comboExists = await this.comboModel.findOne({
+      where: { id: combos.id },
+    });
+
+    if (comboExists) {
+      throw new NotFoundException();
+    }
+
+    // const saleSave = await this.saleModel.save(sale);
+
+    // let totalSale = 0;
+
+    // const Acombos = await this.comboModel.findByIds(data.salesCombo);
+
+    // Acombos.forEach((item) => {
+    //   saleSave.salesCombo.forEach((element) => {
+    //     if (item.id === element.id) {
+    //       totalSale += Number(element.combos.price);
+    //     }
+    //   });
     // });
 
-    saleEntity.payment = createSaleDto.payment;
+    // console.log('Total', totalSale);
 
-    // return this.saleModel.create(createSaleDto);
+    // saleSave.price = totalSale;
 
-    const sale = await this.saleModel.save(saleEntity);
+    // const returnThing = await this.saleModel.save(sale);
 
-    return sale;
+    // returnThing.thing =
+    //   Number(sale.payment.toFixed(2)) - Number(saleSave.price.toFixed(2));
+
+    return await this.saleModel.save(sale);
 
     // return sale;
 
@@ -60,7 +115,7 @@ export class SalesService {
     //   throw new NotFoundException();
     // }
 
-    // // Calculo do valor do combo
+    // Calculo do valor do combo
     // const saleSave = await this.saleModel.save(sale);
 
     // let totalSale = 0;

@@ -1,6 +1,7 @@
+import { SalesCombo } from 'src/models/sales/entities/sales-combo.entity';
 import { Combo } from './../../combos/entities/combo.entity';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateSaleDto {
   @ApiProperty()
@@ -15,7 +16,7 @@ export class CreateSaleDto {
   @IsNotEmpty()
   thing: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNotEmpty()
   combos: Combo[];
 }

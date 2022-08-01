@@ -1,6 +1,13 @@
-import { SalesCombo } from './../../sales-combo/entities/sales-combo.entity';
+import { SalesCombo } from './sales-combo.entity';
 import { Combo } from './../../combos/entities/combo.entity';
-import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+} from 'typeorm';
 import { BaseEntity } from './../../../common/base/base-entity';
 
 @Entity({ name: 'sales' })
@@ -24,6 +31,8 @@ export class Sale extends BaseEntity {
   // })
   // combos: Combo[];
 
-  @OneToMany(() => SalesCombo, (salesCombo) => salesCombo.sales)
+  @OneToMany(() => SalesCombo, (salesCombo) => salesCombo.sales, {
+    cascade: true,
+  })
   salesCombo: SalesCombo[];
 }
