@@ -1,6 +1,4 @@
 import { SalesCombo } from 'src/models/sales/entities/sales-combo.entity';
-import { SalesModule } from './sales.module';
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { Combo } from './../combos/entities/combo.entity';
 import { Sale } from './entities/sale.entity';
@@ -62,8 +60,6 @@ export class SalesService {
       where: { sales: { id: saleModel.id } },
     });
 
-    console.log('Estou aqui', salesComboModel);
-
     const comboExists = await this.comboModel.findOne({
       where: { id: combos.id },
     });
@@ -80,13 +76,19 @@ export class SalesService {
       combosSold += Number(sales.combos.price);
     });
 
-    console.log(' >>>>>>>>>>>>> Total de vendas de combos', combosSold);
-
     saleSave.price = combosSold;
 
     const returnThing = await this.saleModel.save(sale);
 
     const thing = sale.payment - saleSave.price;
+
+    if (sale.payment < saleSave.price) {
+      throw new NotFoundException(
+        `O valor pago R$ ${sale.payment.toFixed(
+          2,
+        )} é menor que o valor consumido R$ ${saleSave.price.toFixed(2)}`,
+      );
+    }
 
     returnThing.thing = thing;
 
@@ -94,7 +96,9 @@ export class SalesService {
   }
 
   async show(): Promise<Sale[]> {
-    const sale = await this.saleModel.find();
+    const sale = await this.saleModel.find({
+      relations: ['salesCombo'],
+    });
 
     if (SalesService.length < 1) {
       throw new HttpException(
@@ -109,7 +113,7 @@ export class SalesService {
   async findOne(id: string): Promise<Sale> {
     const sale = await this.saleModel.findOne({
       where: { id: id },
-      relations: ['combos'],
+      relations: ['salesCombo'],
     });
 
     if (!sale) {

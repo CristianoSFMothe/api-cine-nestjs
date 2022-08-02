@@ -1,9 +1,7 @@
 import { SalesCombo } from '../../sales/entities/sales-combo.entity';
-// import { SalesCombo } from './../../sales/entities/sales-combo.entity';
-import { Sale } from './../../sales/entities/sale.entity';
 import { Item } from './../../items/entities/item.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'combos' })
 export class Combo extends BaseEntity {
