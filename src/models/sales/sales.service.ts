@@ -64,8 +64,8 @@ export class SalesService {
       where: { id: combos.id },
     });
 
-    if (comboExists) {
-      throw new NotFoundException();
+    if (!comboExists) {
+      throw new NotFoundException(MessagesHelper.COMBO_NOT_FOUND);
     }
 
     const saleSave = await this.saleModel.save(sale);
@@ -117,7 +117,7 @@ export class SalesService {
     });
 
     if (!sale) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.SALE_NOT_FOUND);
     }
 
     return sale;
@@ -127,7 +127,7 @@ export class SalesService {
     const sale = await this.saleModel.preload({ id, ...data });
 
     if (!sale) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.COMBO_NOT_FOUND);
     }
 
     return await this.saleModel.save(sale);
@@ -137,7 +137,7 @@ export class SalesService {
     const sale = await this.saleModel.findOne({ where: { id: id } });
 
     if (!sale) {
-      throw new NotFoundException();
+      throw new NotFoundException(MessagesHelper.COMBO_NOT_FOUND);
     }
 
     await this.saleModel.softDelete(id);

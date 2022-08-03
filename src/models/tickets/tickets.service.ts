@@ -29,8 +29,8 @@ export class TicketsService {
       where: { id: ticket.id },
     });
 
-    if (ticketExists) {
-      throw new NotFoundException();
+    if (!ticketExists) {
+      throw new NotFoundException(MessagesHelper.TICKET_EXIST);
     }
 
     const sessionExists = await this.sessionModel.findOne({

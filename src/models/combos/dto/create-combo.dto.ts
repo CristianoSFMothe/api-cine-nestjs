@@ -1,17 +1,19 @@
+import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { Item } from './../../items/entities/item.entity';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsArray, IsNotEmpty } from 'class-validator';
 
 export class CreateComboDto {
   @ApiProperty()
-  @IsNotEmpty()
-  name: string;
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
+  readonly name: string;
 
   @ApiPropertyOptional()
   @IsNotEmpty()
-  price: number;
+  readonly price: number;
 
-  @ApiPropertyOptional()
-  @IsNotEmpty()
-  items: Item[];
+  @ApiProperty()
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
+  @IsArray()
+  readonly items: Item[];
 }

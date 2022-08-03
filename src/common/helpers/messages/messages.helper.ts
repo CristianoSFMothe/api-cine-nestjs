@@ -17,7 +17,16 @@ export const MessagesHelper = {
 
   TICKET_NOT_FOUND: 'Não encontrado nenhum ingresso.',
 
+  TICKET_EXIST: 'Ingresso já cadastrado.',
+
   SESSION_INVALID: 'Sessão já utilizada.',
 
   SALE_NOT_FOUND: 'Não encontrado nenhuma venda.',
+
+  NOT_EMPTY: 'Campo tem que ser preenchido.',
+
+  NOT_IS_NUMBER_VALID: 'O campo necessita ser um número válido.',
+
+  NOT_IS_STRING_VALID:
+    'O campo necessita ser uma cadeia de caracteres ou string.',
 };

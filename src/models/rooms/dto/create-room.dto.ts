@@ -1,3 +1,4 @@
+import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { Session } from './../../sessions/entities/session.entity';
 import { TypeRoom } from './../entities/room.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -5,26 +6,26 @@ import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateRoomDto {
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: MessagesHelper.NOT_IS_STRING_VALID })
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
   readonly name: string;
 
   @ApiProperty()
-  @IsNumber()
-  @IsNotEmpty()
+  @IsNumber({}, { message: MessagesHelper.NOT_IS_NUMBER_VALID })
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
   readonly maximumCapacity: number;
 
   @ApiProperty()
-  @IsNumber()
-  @IsNotEmpty()
+  @IsNumber({}, { message: MessagesHelper.NOT_IS_NUMBER_VALID })
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
   readonly minimumCapacity: number;
 
   @ApiProperty({ enum: Object.keys(TypeRoom) })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
   @IsEnum(TypeRoom)
   readonly typeRoom: TypeRoom;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
   sessions: Session[];
 }

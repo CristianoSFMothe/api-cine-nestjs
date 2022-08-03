@@ -24,8 +24,8 @@ export class ItemsService {
       where: { id: item.id },
     });
 
-    if (itemExists) {
-      throw new NotFoundException();
+    if (!itemExists) {
+      throw new NotFoundException(MessagesHelper.ITEM_NOT_FOUND);
     }
 
     return await this.itemModel.save(item);
