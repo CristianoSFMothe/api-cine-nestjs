@@ -1,6 +1,6 @@
 import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDecimal, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateItemDto {
   @ApiProperty()
@@ -10,6 +10,7 @@ export class CreateItemDto {
 
   @ApiProperty()
   @IsNotEmpty({ message: MessagesHelper.NOT_EMPTY })
+  @IsDecimal({ locale: 'pt-BR' })
   readonly price: number;
 
   @ApiProperty()

@@ -1,4 +1,4 @@
-import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger copy';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedComboSwagger } from './../../common/swagger/Combo/update-combo.swagger';
 import { FindByIdComboSwagger } from './../../common/swagger/Combo/findById-combo.swagger';
@@ -13,6 +13,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CombosService } from './combos.service';
@@ -64,7 +65,7 @@ export class CombosController {
     description: 'Combo não foi encontrado.',
     type: NotFoundSwagger,
   })
-  findOne(@Param('id') id: string): Promise<Combo> {
+  findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<Combo> {
     return this.combosService.findOne(id);
   }
 
@@ -86,7 +87,7 @@ export class CombosController {
     type: NotFoundSwagger,
   })
   update(
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateComboDto: UpdateComboDto,
   ): Promise<Combo> {
     return this.combosService.update(id, updateComboDto);
@@ -100,7 +101,7 @@ export class CombosController {
     description: 'Combo não foi encontrado',
     type: NotFoundSwagger,
   })
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     return this.combosService.remove(id);
   }
 }

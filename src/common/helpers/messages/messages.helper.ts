@@ -29,4 +29,8 @@ export const MessagesHelper = {
 
   NOT_IS_STRING_VALID:
     'O campo necessita ser uma cadeia de caracteres ou string.',
+
+  USER_NOT_FOUND: 'Não foi localizado nenhum usuário na pesquisa',
+
+  ADDRESS_NOT_FOUND: 'Não foi localizado nenhum usuário na pesquisa',
 };

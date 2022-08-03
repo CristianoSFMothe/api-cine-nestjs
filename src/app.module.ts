@@ -8,6 +8,8 @@ import { ItemsModule } from './models/items/items.module';
 import { CombosModule } from './models/combos/combos.module';
 import { TicketsModule } from './models/tickets/tickets.module';
 import { SalesModule } from './models/sales/sales.module';
+import { UsersModule } from './models/users/users.module';
+import { AddressModule } from './models/address/address.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { SalesModule } from './models/sales/sales.module';
     CombosModule,
     TicketsModule,
     SalesModule,
+    UsersModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [],

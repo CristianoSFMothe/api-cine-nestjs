@@ -3,7 +3,7 @@ import { FindByIdSalesSwagger } from './../../common/swagger/Sales/findById-sale
 import { ShowSalesSwagger } from './../../common/swagger/Sales/show-sales.swagger';
 import { CreateSalesSwagger } from './../../common/swagger/Sales/create-sales.swagger';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
-import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger copy';
 import { Sale } from './entities/sale.entity';
 import {
   Controller,
