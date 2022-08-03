@@ -1,4 +1,4 @@
-import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedSessionSwagger } from './../../common/swagger/Session/update-session.swagger';
 import { FindByIdSessionSwagger } from './../../common/swagger/Session/findById-session.swagger';

@@ -1,4 +1,4 @@
-import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedTicketSwagger } from './../../common/swagger/Ticket/update-ticket.swagger';
 import { FindByIdTicketSwagger } from './../../common/swagger/Ticket/findById-ticket.swagger';

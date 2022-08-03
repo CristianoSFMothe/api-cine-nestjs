@@ -1,4 +1,4 @@
-import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { FindFullMovieSwagger } from './../../common/swagger/Movie/findFull-movie.swagger';
 import { UpdatedMovieSwagger } from './../../common/swagger/Movie/update-movie.swagger';

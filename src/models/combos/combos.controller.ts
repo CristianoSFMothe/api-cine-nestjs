@@ -1,4 +1,4 @@
-import { NotFoundSwagger } from './../../common/helpers/swagger/not-found.swagger copy';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedComboSwagger } from './../../common/swagger/Combo/update-combo.swagger';
 import { FindByIdComboSwagger } from './../../common/swagger/Combo/findById-combo.swagger';
