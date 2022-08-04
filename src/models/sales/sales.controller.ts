@@ -26,7 +26,7 @@ export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Ingresso de uma sessão' })
+  @ApiOperation({ summary: 'Criação de vendas' })
   @ApiResponse({ status: 400, description: 'Pâramentros inválidos' })
   @ApiResponse({
     status: 201,
@@ -38,10 +38,12 @@ export class SalesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todas as ingresso retornado com sucesso' })
+  @ApiOperation({
+    summary: 'Listagem de  todas as vendas retornado com sucesso',
+  })
   @ApiResponse({
     status: 200,
-    description: 'Lista de ingresso',
+    description: 'Lista de vendas',
     type: ShowSalesSwagger,
     isArray: true,
   })
@@ -50,15 +52,15 @@ export class SalesController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Ingresso um item por ID' })
+  @ApiOperation({ summary: 'Listagem de uma venda por ID' })
   @ApiResponse({
     status: 200,
-    description: 'Dados de um ingresso retornando com sucesso',
+    description: 'Dados de um venda retornando com sucesso',
     type: FindByIdSalesSwagger,
   })
   @ApiResponse({
     status: 404,
-    description: 'Ingresso não foi encontrado.',
+    description: 'Venda não foi encontrado.',
     type: NotFoundSwagger,
   })
   findOne(@Param('id', new ParseUUIDPipe()) id: string): Promise<Sale> {
@@ -66,10 +68,10 @@ export class SalesController {
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualização de uma ingresso por ID' })
+  @ApiOperation({ summary: 'Atualização de uma venda por ID' })
   @ApiResponse({
     status: 200,
-    description: 'Ingresso atualizado com sucesso',
+    description: 'Venda atualizado com sucesso',
     type: UpdatedSalesSwagger,
   })
   @ApiResponse({
@@ -79,7 +81,7 @@ export class SalesController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Ingresso não foi encontrado',
+    description: 'Venda não foi encontrado',
     type: NotFoundSwagger,
   })
   update(
@@ -90,11 +92,11 @@ export class SalesController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Exclusão de uma ingresso por ID' })
-  @ApiResponse({ status: 204, description: 'Ingresso removido com sucesso' })
+  @ApiOperation({ summary: 'Exclusão de uma venda por ID' })
+  @ApiResponse({ status: 204, description: 'Venda removido com sucesso' })
   @ApiResponse({
     status: 404,
-    description: 'Ingresso não foi encontrado',
+    description: 'Venda não foi encontrado',
     type: NotFoundSwagger,
   })
   remove(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {

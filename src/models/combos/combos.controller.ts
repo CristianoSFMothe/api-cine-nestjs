@@ -42,7 +42,9 @@ export class CombosController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todos os combos retornado com sucesso' })
+  @ApiOperation({
+    summary: 'Listagen de todos os combos retornado com sucesso',
+  })
   @ApiResponse({
     status: 200,
     description: 'Lista de combos',
@@ -54,7 +56,7 @@ export class CombosController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Lista um combo por ID' })
+  @ApiOperation({ summary: 'Listagem de um combo por ID' })
   @ApiResponse({
     status: 200,
     description: 'Dados de um combo retornando com sucesso',

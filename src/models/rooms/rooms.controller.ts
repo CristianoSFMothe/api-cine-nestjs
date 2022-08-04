@@ -38,7 +38,7 @@ export class RoomsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todas as Sala retornado com sucesso' })
+  @ApiOperation({ summary: 'Listagen de todas as Sala retornado com sucesso' })
   @ApiResponse({
     status: 200,
     description: 'Lista de Sala',

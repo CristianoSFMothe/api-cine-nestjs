@@ -1,5 +1,6 @@
+import { User } from './../../users/entities/user.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'address' })
 export class Address extends BaseEntity {
@@ -23,4 +24,8 @@ export class Address extends BaseEntity {
 
   @Column({ name: 'UF' })
   uf: string;
+
+  @ManyToOne(() => User, (user: User) => user.address, { cascade: true })
+  @JoinColumn({ name: 'users_id' })
+  users: User;
 }

@@ -5,34 +5,34 @@ export class CreateAddressDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  homeAddress: string;
+  readonly homeAddress: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  homeNumber: string;
+  readonly homeNumber: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  zipCode: number;
+  readonly zipCode: number;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  district: string;
+  readonly district: string;
 
   @ApiProperty()
   @IsString()
-  complement: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  city: string;
+  readonly complement: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  uf: string;
+  readonly city: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  readonly uf: string;
 }

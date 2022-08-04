@@ -38,10 +38,12 @@ export class TicketsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todas as ingresso retornado com sucesso' })
+  @ApiOperation({
+    summary: 'Listagem de todas as ingresso retornado com sucesso',
+  })
   @ApiResponse({
     status: 200,
-    description: 'Lista de ingresso',
+    description: 'Listagen um de ingresso',
     type: ShowTicketSwagger,
     isArray: true,
   })
@@ -50,7 +52,7 @@ export class TicketsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Ingresso um item por ID' })
+  @ApiOperation({ summary: 'Ingresso um por ID' })
   @ApiResponse({
     status: 200,
     description: 'Dados de um ingresso retornando com sucesso',

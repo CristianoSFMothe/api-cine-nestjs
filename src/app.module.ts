@@ -10,6 +10,7 @@ import { TicketsModule } from './models/tickets/tickets.module';
 import { SalesModule } from './models/sales/sales.module';
 import { UsersModule } from './models/users/users.module';
 import { AddressModule } from './models/address/address.module';
+import { CardsModule } from './models/cards/cards.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AddressModule } from './models/address/address.module';
     SalesModule,
     UsersModule,
     AddressModule,
+    CardsModule,
   ],
   controllers: [],
   providers: [],

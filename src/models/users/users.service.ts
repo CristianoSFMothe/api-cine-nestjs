@@ -1,3 +1,4 @@
+import { Address } from './../address/entities/address.entity';
 import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { User } from './entities/user.entity';
 import {
@@ -16,10 +17,15 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersModel: Repository<User>,
+
+    @InjectRepository(Address)
+    private readonly addressModel: Repository<Address>,
   ) {}
 
   async create(data: CreateUserDto): Promise<User> {
     const user = this.usersModel.create(data);
+
+    user.address = await this.addressModel.findByIds(data.address);
 
     const emailExists = await this.usersModel.findOne({
       where: { email: data.email },
@@ -49,7 +55,9 @@ export class UsersService {
   }
 
   async show(): Promise<User[]> {
-    const user = await this.usersModel.find();
+    const user = await this.usersModel.find({
+      relations: ['address'],
+    });
 
     if (user.length < 1) {
       throw new HttpException(
@@ -62,6 +70,7 @@ export class UsersService {
 
   async findById(id: string): Promise<User> {
     const user = await this.usersModel.findOneOrFail({
+      relations: ['address'],
       where: { id: id },
     });
 

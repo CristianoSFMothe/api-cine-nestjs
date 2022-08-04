@@ -1,5 +1,6 @@
+import { Address } from './../../address/entities/address.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 export enum Gender {
   male = 'male',
@@ -63,4 +64,10 @@ export class User extends BaseEntity {
     type: 'bigint',
   })
   cpf: number;
+
+  @OneToMany(() => Address, (address: Address) => address.users, {
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  })
+  address: Address[];
 }

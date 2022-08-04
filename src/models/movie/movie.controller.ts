@@ -39,7 +39,7 @@ export class MovieController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todos os Filme retornado com sucesso' })
+  @ApiOperation({ summary: 'Listagem de todos os Filme retornado com sucesso' })
   @ApiResponse({
     status: 200,
     description: 'Lista de filmes',
@@ -51,7 +51,7 @@ export class MovieController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Filme um item por ID' })
+  @ApiOperation({ summary: 'Listagem de um filme um item por ID' })
   @ApiResponse({
     status: 200,
     description: 'Dados de um filme retornando com sucesso',

@@ -38,7 +38,7 @@ export class ItemsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todos os itens retornado com sucesso' })
+  @ApiOperation({ summary: 'Listagen de todos os itens retornado com sucesso' })
   @ApiResponse({
     status: 200,
     description: 'Lista de itens',
@@ -50,7 +50,7 @@ export class ItemsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Lista um item por ID' })
+  @ApiOperation({ summary: 'Listagem de um item por ID' })
   @ApiResponse({
     status: 200,
     description: 'Dados de um item retornando com sucesso',

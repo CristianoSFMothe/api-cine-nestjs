@@ -32,5 +32,5 @@ export const MessagesHelper = {
 
   USER_NOT_FOUND: 'Não foi localizado nenhum usuário na pesquisa',
 
-  ADDRESS_NOT_FOUND: 'Não foi localizado nenhum usuário na pesquisa',
+  ADDRESS_NOT_FOUND: 'Não foi localizado nenhum endereço na pesquisa',
 };
