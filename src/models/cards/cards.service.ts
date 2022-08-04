@@ -1,26 +1,66 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
+import { Card } from './entities/card.entity';
 
 @Injectable()
 export class CardsService {
-  create(createCardDto: CreateCardDto) {
-    return 'This action adds a new card';
+  constructor(
+    @InjectRepository(Card)
+    private readonly cardsModel: Repository<Card>,
+  ) {}
+  async create(data: CreateCardDto): Promise<Card> {
+    const cards = this.cardsModel.create(data);
+
+    return await this.cardsModel.save(cards);
   }
 
-  findAll() {
-    return `This action returns all cards`;
+  async show(): Promise<Card[]> {
+    const cards = await this.cardsModel.find();
+
+    if (cards.length < 1) {
+      throw new NotFoundException();
+    }
+
+    return cards;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} card`;
+  async findOne(id: string): Promise<Card> {
+    const cards = await this.cardsModel.findOne({
+      where: { id: id },
+    });
+
+    if (!cards) {
+      throw new NotFoundException();
+    }
+
+    return cards;
   }
 
-  update(id: number, updateCardDto: UpdateCardDto) {
-    return `This action updates a #${id} card`;
+  async update(id: string, data: UpdateCardDto): Promise<Card> {
+    const cards = await this.cardsModel.preload({
+      id,
+      ...data,
+    });
+
+    if (!cards) {
+      throw new NotFoundException();
+    }
+
+    return await this.cardsModel.save(cards);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} card`;
+  async remove(id: string): Promise<void> {
+    const cards = await this.cardsModel.findOne({
+      where: { id: id },
+    });
+
+    if (!cards) {
+      throw new NotFoundException();
+    }
+
+    await this.cardsModel.softDelete(id);
   }
 }

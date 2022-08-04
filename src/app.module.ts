@@ -11,6 +11,7 @@ import { SalesModule } from './models/sales/sales.module';
 import { UsersModule } from './models/users/users.module';
 import { AddressModule } from './models/address/address.module';
 import { CardsModule } from './models/cards/cards.module';
+import { CheckoutModule } from './models/checkout/checkout.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CardsModule } from './models/cards/cards.module';
     UsersModule,
     AddressModule,
     CardsModule,
+    CheckoutModule,
   ],
   controllers: [],
   providers: [],
