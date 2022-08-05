@@ -19,10 +19,8 @@ import { Exclude } from 'class-transformer';
 export class CreateCardDto {
   @ApiProperty()
   @IsNotEmpty()
-  @Min(16, { message: MessagesHelper.INCORRED_CARD_NUMBER })
-  // @Max(16, { message: MessagesHelper.NUMBER_CARD_SIZE })
-  @IsInt()
-  numberCard: number;
+  @MinLength(16, { message: MessagesHelper.INCORRED_CARD_NUMBER })
+  numberCard: string;
 
   @ApiProperty()
   @IsNotEmpty()

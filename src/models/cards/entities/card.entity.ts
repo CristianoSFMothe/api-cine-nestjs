@@ -20,9 +20,10 @@ export enum Insitution {
 export class Card extends BaseEntity {
   @Column({
     name: 'number_card',
-    type: 'bigint',
+    type: 'varchar',
+    length: 16
   })
-  numberCard: number;
+  numberCard: string;
 
   @Column({ default: 'dd/yy' })
   expiration: string;
