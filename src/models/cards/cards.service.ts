@@ -30,6 +30,22 @@ export class CardsService {
 
     cards.users = await this.usersModel.findByIds(data.users);
 
+    // const validNumberCard = await this.cardsModel.find({
+    //   where: { numberCard: data.numberCard },
+    // });
+
+    // if (validNumberCard.length >= 16) {
+    //   throw new NotFoundException(MessagesHelper.NUMBER_CARD_SIZE);
+    // }
+
+    // const validsecurityCode = await this.cardsModel.find({
+    //   where: { securityCode: data.securityCode },
+    // });
+
+    // if (validsecurityCode.length >= 3) {
+    //   throw new NotFoundException(MessagesHelper.SECURITY_CODE_ERROR);
+    // }
+
     return await this.cardsModel.save(cards);
   }
 

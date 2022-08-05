@@ -53,6 +53,8 @@ export class Card extends BaseEntity {
     name: 'form',
     type: 'enum',
     enum: Form,
+    nullable: false,
+    default: Form.CartaoCredito,
   })
   form: Form;
 
@@ -60,6 +62,8 @@ export class Card extends BaseEntity {
     name: 'institution',
     type: 'enum',
     enum: Insitution,
+    nullable: false,
+    default: Insitution.AmericanExpress
   })
   institution: Insitution;
 
