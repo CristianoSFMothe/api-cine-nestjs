@@ -1,4 +1,4 @@
-import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger';
+import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger copy';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { UpdatedRoomSwagger } from '../../common/swagger/Room/update-room.swagger';
 import { FindByIdRoomSwagger } from '../../common/swagger/Room/findById-room.swagger';
@@ -38,7 +38,7 @@ export class RoomsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lista todas as Sala retornado com sucesso' })
+  @ApiOperation({ summary: 'Listagen de todas as Sala retornado com sucesso' })
   @ApiResponse({
     status: 200,
     description: 'Lista de Sala',

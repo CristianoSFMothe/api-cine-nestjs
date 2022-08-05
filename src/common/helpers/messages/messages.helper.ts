@@ -29,4 +29,24 @@ export const MessagesHelper = {
 
   NOT_IS_STRING_VALID:
     'O campo necessita ser uma cadeia de caracteres ou string.',
+
+  USER_NOT_FOUND: 'Não foi localizado nenhum usuário na pesquisa',
+
+  ADDRESS_NOT_FOUND: 'Não foi localizado nenhum endereço na pesquisa',
+
+  CHECKOUT_NOT_FOUND: 'Não foi localizado nenhum endereço na pesquisa',
+
+  NUMBER_OUTSIDE_SIZE: 'Número muito grande.',
+
+  NUMBER_EXISTS: 'Número de cartão já existe.',
+
+  NUMBER_NOT_FOUND: 'Foi encontrado nenhum cartão.',
+
+  SECURITY_CODE_ERROR: 'Código de segunraça inválido',
+
+  SECURITY_CODE_SIZE: 'Código de segunraça não tem 3 números',
+
+  NUMBER_CARD_SIZE: 'O número do cartão deve ter a 16 números',
+
+  INCORRED_CARD_NUMBER: 'O número do cartão está incorredo',
 };
