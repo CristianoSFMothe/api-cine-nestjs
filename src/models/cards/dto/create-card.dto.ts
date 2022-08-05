@@ -2,6 +2,7 @@ import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { User } from './../../users/entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsBoolean,
   IsEnum,
   IsInt,
   IsNotEmpty,
@@ -56,6 +57,11 @@ export class CreateCardDto {
   @IsNotEmpty()
   @IsNumber()
   installments: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  stateActive: boolean;
 
   @ApiProperty()
   @IsNotEmpty()
