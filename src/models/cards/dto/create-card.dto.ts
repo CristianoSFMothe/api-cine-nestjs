@@ -14,6 +14,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { Form, Insitution } from '../entities/card.entity';
+import { Exclude } from 'class-transformer';
 
 export class CreateCardDto {
   @ApiProperty()
