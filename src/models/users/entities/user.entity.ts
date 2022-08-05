@@ -1,6 +1,7 @@
+import { Card } from './../../cards/entities/card.entity';
 import { Address } from './../../address/entities/address.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 export enum Gender {
   male = 'male',
@@ -70,4 +71,8 @@ export class User extends BaseEntity {
     onDelete: 'SET NULL',
   })
   address: Address[];
+
+  @ManyToOne(() => Card, (card: Card) => card.users)
+  @JoinColumn({ name: 'card_id' })
+  card: Card;
 }

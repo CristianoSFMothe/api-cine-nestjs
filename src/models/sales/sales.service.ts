@@ -64,7 +64,7 @@ export class SalesService {
       where: { id: combos.id },
     });
 
-    if (!comboExists) {
+    if (comboExists) {
       throw new NotFoundException(MessagesHelper.COMBO_NOT_FOUND);
     }
 

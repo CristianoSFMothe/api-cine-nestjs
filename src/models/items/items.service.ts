@@ -24,7 +24,7 @@ export class ItemsService {
       where: { id: item.id },
     });
 
-    if (!itemExists) {
+    if (itemExists) {
       throw new NotFoundException(MessagesHelper.ITEM_NOT_FOUND);
     }
 

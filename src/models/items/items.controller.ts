@@ -1,9 +1,9 @@
+import { ShowItemSwagger } from './../../common/swagger/Item/show-item.swagger';
+import { FindByIdItemSwagger } from './../../common/swagger/Item/findById-item.swagger';
+import { CreateItemSwagger } from './../../common/swagger/Item/create-item.swagger';
 import { BadRequestSwagger } from './../../common/helpers/swagger/bad-request.swagger';
 import { NotFoundSwagger } from '../../common/helpers/swagger/not-found.swagger copy';
 import { UpdatedItemSwagger } from '../../common/swagger/Item/update-item.swagger';
-import { FindByIdComboSwagger } from './../../common/swagger/Combo/findById-combo.swagger';
-import { ShowComboSwagger } from './../../common/swagger/Combo/show-combo.swagger';
-import { CreateComboSwagger } from './../../common/swagger/Combo/create-combo.swagger';
 import { Item } from './entities/item.entity';
 import {
   Controller,
@@ -31,7 +31,7 @@ export class ItemsController {
   @ApiResponse({
     status: 201,
     description: 'Item criado com sucesso',
-    type: CreateComboSwagger,
+    type: CreateItemSwagger,
   })
   create(@Body() data: CreateItemDto): Promise<Item> {
     return this.itemsService.createItem(data);
@@ -42,7 +42,7 @@ export class ItemsController {
   @ApiResponse({
     status: 200,
     description: 'Lista de itens',
-    type: ShowComboSwagger,
+    type: ShowItemSwagger,
     isArray: true,
   })
   findAll(): Promise<Item[]> {
@@ -54,7 +54,7 @@ export class ItemsController {
   @ApiResponse({
     status: 200,
     description: 'Dados de um item retornando com sucesso',
-    type: FindByIdComboSwagger,
+    type: FindByIdItemSwagger,
   })
   @ApiResponse({
     status: 404,

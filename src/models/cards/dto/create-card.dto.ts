@@ -1,12 +1,33 @@
+import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
+import { User } from './../../users/entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, Max } from 'class-validator';
+import {
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+} from 'class-validator';
+import { Form, Insitution } from '../entities/card.entity';
 
 export class CreateCardDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
-  @Max(12)
+  @Min(16, { message: MessagesHelper.INCORRED_CARD_NUMBER })
+  // @Max(16, { message: MessagesHelper.NUMBER_CARD_SIZE })
+  @IsInt()
   numberCard: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  // @Max(3, { message: MessagesHelper.SECURITY_CODE_ERROR })
+  @Min(3, { message: MessagesHelper.SECURITY_CODE_SIZE })
+  @IsNumber()
+  securityCode: number;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -14,8 +35,29 @@ export class CreateCardDto {
   expiration: string;
 
   @ApiProperty()
+  @IsNumber()
+  availablePay: number;
+
+  @ApiProperty()
+  @IsNumber()
+  spentPay: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Form)
+  form: Form;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Insitution)
+  institution: Insitution;
+
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  @Max(3)
-  securityCode: number;
+  installments: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  users: User[];
 }
