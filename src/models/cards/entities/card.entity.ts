@@ -21,12 +21,9 @@ export class Card extends BaseEntity {
   @Column({
     name: 'number_card',
     type: 'varchar',
-    length: 16
+    length: 16,
   })
   numberCard: string;
-
-  @Column({ default: 'dd/yy' })
-  expiration: string;
 
   @Column({
     name: 'security_code',
@@ -35,20 +32,28 @@ export class Card extends BaseEntity {
   securityCode: number;
 
   @Column({
-    name: 'available_pay',
-    type: 'decimal',
-    precision: 10,
-    scale: 2,
+    name: 'expiration',
+    type: 'varchar',
+    default: 'dd/yy',
   })
-  availablePay: number;
+  expiration: string;
 
   @Column({
-    name: 'spent_pay',
+    name: 'limit_available',
     type: 'decimal',
     precision: 10,
     scale: 2,
   })
-  spentPay: number;
+  limitAvailable: number;
+
+  @Column({
+    //payAvailable = valor para pagar
+    name: 'amount_payment',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+  })
+  amountPayment: number;
 
   @Column({
     name: 'form',
@@ -64,15 +69,18 @@ export class Card extends BaseEntity {
     type: 'enum',
     enum: Insitution,
     nullable: false,
-    default: Insitution.AmericanExpress
+    default: Insitution.AmericanExpress,
   })
   institution: Insitution;
 
-  @Column()
+  @Column({
+    name: 'installments',
+    type: 'int',
+  })
   installments: number;
 
   @Column({
-    name: 'state_ativo',
+    name: 'state_active',
     type: 'boolean',
     default: true,
   })

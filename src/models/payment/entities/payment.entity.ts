@@ -2,15 +2,9 @@ import { BaseEntity } from './../../../common/base/base-entity';
 import { Column, Entity } from "typeorm";
 
 export enum PaymentStatus {
+  Cancelado = 'Cancelado',
   Sucesso = 'Sucesso',
   Falha = 'Falha',
-}
-
-export enum Status {
-  EmAnalise = 'EmAnalise',
-  Autorizado = 'Autorizado',
-  Iniciado = 'Iniciado',
-  Cancelado = 'Cancelado',
 }
 
 @Entity({ name: 'payment' })
@@ -23,10 +17,12 @@ export class Payment extends BaseEntity {
   paymentStatus: PaymentStatus;
 
   @Column({
-    type: 'enum',
-    enum: Status,
+    name: 'payment',
+    type: 'decimal',
+    precision: 10,
+    scale: 2
   })
-  status: Status;
+  payment: number;
 
   @Column({
     name: 'total_paid',
@@ -37,6 +33,7 @@ export class Payment extends BaseEntity {
   totalPaid: number;
 
   @Column({
+    name: 'message',
     type: 'text'
   })
   message: string;
