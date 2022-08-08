@@ -1,5 +1,6 @@
+import { Card } from './../../cards/entities/card.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity } from "typeorm";
+import { Column, Entity, OneToMany } from 'typeorm';
 
 export enum PaymentStatus {
   Cancelado = 'Cancelado',
@@ -20,13 +21,19 @@ export class Payment extends BaseEntity {
     name: 'payment',
     type: 'decimal',
     precision: 10,
-    scale: 2
+    scale: 2,
   })
   payment: number;
 
   @Column({
     name: 'message',
-    type: 'text'
+    type: 'text',
   })
   message: string;
+
+  @OneToMany(() => Card, (card: Card) => card.payment, {
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  })
+  cards: Card[];
 }

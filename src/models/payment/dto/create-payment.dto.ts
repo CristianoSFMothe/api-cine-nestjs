@@ -1,3 +1,4 @@
+import { Card } from './../../cards/entities/card.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { PaymentStatus } from '../entities/payment.entity';
@@ -17,4 +18,8 @@ export class CreatePaymentDto {
   @IsNotEmpty()
   @IsString()
   message: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  cards: Card[];
 }

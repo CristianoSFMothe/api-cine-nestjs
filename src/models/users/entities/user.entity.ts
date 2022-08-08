@@ -22,7 +22,7 @@ export class User extends BaseEntity {
     type: 'enum',
     enum: Gender,
     nullable: false,
-    default: Gender.Masculino
+    default: Gender.Masculino,
   })
   gender: Gender;
 
@@ -73,7 +73,9 @@ export class User extends BaseEntity {
   })
   address: Address[];
 
-  @ManyToOne(() => Card, (card: Card) => card.users)
+  @ManyToOne(() => Card, (card: Card) => card.users, {
+    cascade: true,
+  })
   @JoinColumn({ name: 'card_id' })
   card: Card;
 }

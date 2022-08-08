@@ -1,6 +1,7 @@
+import { Payment } from './../../payment/entities/payment.entity';
 import { User } from './../../users/entities/user.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 export enum Form {
   CartaoCredito = 'CartaoCredito',
@@ -86,6 +87,15 @@ export class Card extends BaseEntity {
   })
   stateCard: boolean;
 
-  @OneToMany(() => User, (users: User) => users.card, { cascade: true })
+  @OneToMany(() => User, (users: User) => users.card, {
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  })
   users: User[];
+
+  @ManyToOne(() => Payment, (payment: Payment) => payment.cards, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'card_id' })
+  payment: Payment;
 }
