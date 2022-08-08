@@ -4,8 +4,8 @@ import { BaseEntity } from './../../../common/base/base-entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 export enum TypeRoom {
-  TWO_D = 'TWO_D',
-  THREE_D = 'THREE_D',
+  DOIS_D = 'DOIS_D',
+  TRES_D = 'TRES_D',
 }
 
 @Entity({ name: 'rooms' })
@@ -24,17 +24,19 @@ export class Room extends BaseEntity {
     type: 'enum',
     enum: TypeRoom,
     nullable: false,
-    default: TypeRoom.TWO_D,
+    default: TypeRoom.DOIS_D,
   })
   typeRoom: TypeRoom;
 
   @OneToMany(() => Session, (session: Session) => session.rooms, {
-    cascade: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
   })
-  @JoinColumn({ name: 'session_id', referencedColumnName: 'id' })
   sessions: Session[];
 
-  @ManyToOne(() => Movie, (movie: Movie) => movie.rooms, { cascade: true })
-  @JoinColumn({ name: 'movie_id' })
+  @ManyToOne(() => Movie, (movie: Movie) => movie.rooms, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'movie_id', referencedColumnName: 'id' })
   movies: Movie;
 }

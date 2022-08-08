@@ -29,7 +29,7 @@ export class TicketsService {
       where: { id: ticket.id },
     });
 
-    if (!ticketExists) {
+    if (ticketExists) {
       throw new NotFoundException(MessagesHelper.TICKET_EXIST);
     }
 
@@ -37,7 +37,7 @@ export class TicketsService {
       where: { id: ticket.id },
     });
 
-    if (!sessionExists) {
+    if (sessionExists) {
       throw new HttpException(
         MessagesHelper.SESSION_INVALID,
         HttpStatus.BAD_REQUEST,

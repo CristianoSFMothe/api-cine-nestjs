@@ -96,6 +96,9 @@ export class Card extends BaseEntity {
   @ManyToOne(() => Payment, (payment: Payment) => payment.cards, {
     cascade: true,
   })
-  @JoinColumn({ name: 'card_id' })
+  @JoinColumn({
+    name: 'card_id',
+    referencedColumnName: 'id',
+  })
   payment: Payment;
 }

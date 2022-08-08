@@ -76,6 +76,9 @@ export class User extends BaseEntity {
   @ManyToOne(() => Card, (card: Card) => card.users, {
     cascade: true,
   })
-  @JoinColumn({ name: 'card_id' })
+  @JoinColumn({
+    name: 'card_id',
+    referencedColumnName: 'id',
+  })
   card: Card;
 }

@@ -25,7 +25,12 @@ export class Address extends BaseEntity {
   @Column({ name: 'UF' })
   uf: string;
 
-  @ManyToOne(() => User, (user: User) => user.address, { cascade: true })
-  @JoinColumn({ name: 'users_id' })
+  @ManyToOne(() => User, (user: User) => user.address, {
+    cascade: true,
+  })
+  @JoinColumn({
+    name: 'users_id',
+    referencedColumnName: 'id',
+  })
   users: User;
 }

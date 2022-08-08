@@ -1,3 +1,4 @@
+import { Ticket } from './../../tickets/entities/ticket.entity';
 import { Card } from './../../cards/entities/card.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
 import { Column, Entity, OneToMany } from 'typeorm';
@@ -36,4 +37,10 @@ export class Payment extends BaseEntity {
     onDelete: 'SET NULL',
   })
   cards: Card[];
+
+  @OneToMany(() => Ticket, (ticket: Ticket) => ticket.payment, {
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  })
+  tickets: Ticket[];
 }
