@@ -18,7 +18,7 @@ export class Ticket extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
-  @OneToOne(() => Session, {
+  @OneToOne(() => Session, (session: Session) => session.ticket, {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   })
