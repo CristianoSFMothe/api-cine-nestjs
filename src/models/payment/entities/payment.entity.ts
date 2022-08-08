@@ -25,14 +25,6 @@ export class Payment extends BaseEntity {
   payment: number;
 
   @Column({
-    name: 'total_paid',
-    type: 'decimal',
-    precision: 10,
-    scale: 2,
-  })
-  totalPaid: number;
-
-  @Column({
     name: 'message',
     type: 'text'
   })

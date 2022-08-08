@@ -80,11 +80,11 @@ export class Card extends BaseEntity {
   installments: number;
 
   @Column({
-    name: 'state_active',
+    name: 'state_card',
     type: 'boolean',
     default: true,
   })
-  stateActive: boolean;
+  stateCard: boolean;
 
   @OneToMany(() => User, (users: User) => users.card, { cascade: true })
   users: User[];

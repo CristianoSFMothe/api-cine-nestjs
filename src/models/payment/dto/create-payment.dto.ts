@@ -15,11 +15,6 @@ export class CreatePaymentDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
-  totalPaid: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
   @IsString()
   message: string;
 }

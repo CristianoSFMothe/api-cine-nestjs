@@ -56,7 +56,7 @@ export class CreateCardDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  stateActive: boolean;
+  stateCard: boolean;
 
   @ApiProperty()
   @IsNotEmpty()

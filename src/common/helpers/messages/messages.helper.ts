@@ -47,4 +47,6 @@ export const MessagesHelper = {
   SECURITY_CODE_SIZE: 'Código de segunraça não tem 3 números',
 
   INCORRED_CARD_NUMBER: 'O número do cartão está incorredo, deve ter a 16 números',
+
+  PAYMENT_NOT_FOUND: 'Não foi encontrado nenhuma ordem de pagamento.',
 };
