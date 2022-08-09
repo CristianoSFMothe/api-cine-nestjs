@@ -15,6 +15,7 @@ export class Payment extends BaseEntity {
     name: 'payment_status',
     type: 'enum',
     enum: PaymentStatus,
+    nullable: false
   })
   paymentStatus: PaymentStatus;
 

@@ -35,7 +35,7 @@ export class SalesService {
 
     const saleEntity = new Sale();
 
-    saleEntity.salesCombo = [];
+    saleEntity.salesCombo = [];    
 
     saleEntity.thing = 0;
 

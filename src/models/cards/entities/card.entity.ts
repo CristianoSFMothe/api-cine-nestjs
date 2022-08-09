@@ -97,7 +97,7 @@ export class Card extends BaseEntity {
     cascade: true,
   })
   @JoinColumn({
-    name: 'card_id',
+    name: 'payment_id',
     referencedColumnName: 'id',
   })
   payment: Payment;

@@ -49,4 +49,6 @@ export const MessagesHelper = {
   INCORRED_CARD_NUMBER: 'O número do cartão está incorredo, deve ter a 16 números',
 
   PAYMENT_NOT_FOUND: 'Não foi encontrado nenhuma ordem de pagamento.',
+
+  NO_THERE_LIMIT: 'Não há limite disponivel.'
 };

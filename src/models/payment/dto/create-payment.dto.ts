@@ -8,23 +8,23 @@ export class CreatePaymentDto {
   @ApiProperty({ enum: Object.keys(PaymentStatus) })
   @IsNotEmpty()
   @IsEnum(PaymentStatus)
-  paymentStatus: PaymentStatus;
+  readonly paymentStatus: PaymentStatus;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  payment: number;
+  readonly payment: number;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  message: string;
+  readonly message: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  cards: Card[];
+  readonly cards: Card[];
 
   @ApiProperty()
   @IsNotEmpty()
-  tickets: Ticket[];
+  readonly tickets: Ticket[];
 }
