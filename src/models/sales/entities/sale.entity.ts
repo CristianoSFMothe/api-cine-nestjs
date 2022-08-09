@@ -18,7 +18,8 @@ export class Sale extends BaseEntity {
   thing: number;
 
   @OneToMany(() => SalesCombo, (salesCombo) => salesCombo.sales, {
-    cascade: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
   })
   salesCombo: SalesCombo[];
 }

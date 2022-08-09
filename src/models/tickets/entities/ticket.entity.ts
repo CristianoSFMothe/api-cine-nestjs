@@ -1,6 +1,13 @@
+import { Payment } from './../../payment/entities/payment.entity';
 import { Session } from './../../sessions/entities/session.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+} from 'typeorm';
 
 @Entity({ name: 'tickets' })
 export class Ticket extends BaseEntity {
@@ -10,9 +17,18 @@ export class Ticket extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
-  @OneToOne(() => Session, {
+  @OneToOne(() => Session, (session: Session) => session.ticket, {
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  })
+  session: Session;
+
+  @ManyToOne(() => Payment, (payment: Payment) => payment.tickets, {
     cascade: true,
   })
-  @JoinColumn({ name: 'session_id', referencedColumnName: 'id' })
-  session: Session;
+  @JoinColumn({
+    name: 'payment_id',
+    referencedColumnName: 'id',
+  })
+  payment: Payment;
 }

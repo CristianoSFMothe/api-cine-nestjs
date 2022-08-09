@@ -1,7 +1,7 @@
 import { Address } from './../../address/entities/address.entity';
 import { Gender } from './../entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -10,6 +10,7 @@ export class CreateUserDto {
   readonly fullName: string;
 
   @ApiProperty({ enum: Object.keys(Gender) })
+  @IsEnum(Gender)
   @IsNotEmpty()
   gender: Gender;
 

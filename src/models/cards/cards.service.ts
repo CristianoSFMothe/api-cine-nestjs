@@ -1,6 +1,11 @@
 import { MessagesHelper } from 'src/common/helpers/messages/messages.helper';
 import { User } from './../users/entities/user.entity';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { CreateCardDto } from './dto/create-card.dto';
@@ -20,15 +25,26 @@ export class CardsService {
   async create(data: CreateCardDto): Promise<Card> {
     const cards = this.cardsModel.create(data);
 
+    cards.users = await this.usersModel.findByIds(data.users);
+
+    // const userExists = await this.usersModel.findOne({
+    //   where: { id: data.users },
+    // });
+
+    // if (userExists) {
+    //   throw new HttpException('Usuário não existe', HttpStatus.NOT_FOUND);
+    // }
+
     const numberCardExists = await this.cardsModel.findOne({
       where: { numberCard: data.numberCard },
     });
 
     if (numberCardExists) {
-      throw new NotFoundException(MessagesHelper.NUMBER_EXISTS);
+      throw new HttpException(
+        MessagesHelper.NUMBER_EXISTS,
+        HttpStatus.NOT_FOUND,
+      );
     }
-
-    cards.users = await this.usersModel.findByIds(data.users);
 
     return await this.cardsModel.save(cards);
   }

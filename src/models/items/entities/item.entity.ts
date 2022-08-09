@@ -17,6 +17,9 @@ export class Item extends BaseEntity {
     onDelete: 'SET NULL',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'combo_id' })
+  @JoinColumn({
+    name: 'combo_id',
+    referencedColumnName: 'id',
+  })
   itemCombo: Combo;
 }

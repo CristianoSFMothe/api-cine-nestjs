@@ -1,6 +1,7 @@
+import { Payment } from './../../payment/entities/payment.entity';
 import { User } from './../../users/entities/user.entity';
 import { BaseEntity } from './../../../common/base/base-entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 export enum Form {
   CartaoCredito = 'CartaoCredito',
@@ -20,12 +21,10 @@ export enum Insitution {
 export class Card extends BaseEntity {
   @Column({
     name: 'number_card',
-    type: 'bigint',
+    type: 'varchar',
+    length: 16,
   })
-  numberCard: number;
-
-  @Column({ default: 'dd/yy' })
-  expiration: string;
+  numberCard: string;
 
   @Column({
     name: 'security_code',
@@ -34,25 +33,35 @@ export class Card extends BaseEntity {
   securityCode: number;
 
   @Column({
-    name: 'available_pay',
-    type: 'decimal',
-    precision: 10,
-    scale: 2,
+    name: 'expiration',
+    type: 'varchar',
+    default: 'dd/yy',
   })
-  availablePay: number;
+  expiration: string;
 
   @Column({
-    name: 'spent_pay',
+    name: 'limit_available',
     type: 'decimal',
     precision: 10,
     scale: 2,
   })
-  spentPay: number;
+  limitAvailable: number;
+
+  @Column({
+    //payAvailable = valor para pagar
+    name: 'amount_payment',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+  })
+  amountPayment: number;
 
   @Column({
     name: 'form',
     type: 'enum',
     enum: Form,
+    nullable: false,
+    default: Form.CartaoCredito,
   })
   form: Form;
 
@@ -60,19 +69,36 @@ export class Card extends BaseEntity {
     name: 'institution',
     type: 'enum',
     enum: Insitution,
+    nullable: false,
+    default: Insitution.AmericanExpress,
   })
   institution: Insitution;
 
-  @Column()
+  @Column({
+    name: 'installments',
+    type: 'int',
+  })
   installments: number;
 
   @Column({
-    name: 'state_ativo',
+    name: 'state_card',
     type: 'boolean',
     default: true,
   })
-  stateActive: boolean;
+  stateCard: boolean;
 
-  @OneToMany(() => User, (users: User) => users.card, { cascade: true })
+  @OneToMany(() => User, (users: User) => users.card, {
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  })
   users: User[];
+
+  @ManyToOne(() => Payment, (payment: Payment) => payment.cards, {
+    cascade: true,
+  })
+  @JoinColumn({
+    name: 'payment_id',
+    referencedColumnName: 'id',
+  })
+  payment: Payment;
 }

@@ -11,14 +11,15 @@ export class Combo extends BaseEntity {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
-  @OneToMany(() => Item, (item: Item) => item.itemCombo, { cascade: true })
+  @OneToMany(() => Item, (item: Item) => item.itemCombo, { 
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+   })
   items: Item[];
 
-  // @ManyToMany(() => Sale, (sale: Sale) => sale.combos)
-  // sales: Sale[];
-
   @OneToMany(() => SalesCombo, (salesCombo) => salesCombo.combos, {
-    cascade: true,
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
   })
   salesCombo: SalesCombo[];
 }

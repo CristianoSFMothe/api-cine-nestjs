@@ -4,12 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsEnum,
-  IsInt,
   IsNotEmpty,
   IsNumber,
   IsString,
-  Max,
-  MaxLength,
   Min,
   MinLength,
 } from 'class-validator';
@@ -18,10 +15,8 @@ import { Form, Insitution } from '../entities/card.entity';
 export class CreateCardDto {
   @ApiProperty()
   @IsNotEmpty()
-  @Min(16, { message: MessagesHelper.INCORRED_CARD_NUMBER })
-  // @Max(16, { message: MessagesHelper.NUMBER_CARD_SIZE })
-  @IsInt()
-  numberCard: number;
+  @MinLength(16, { message: MessagesHelper.INCORRED_CARD_NUMBER })
+  numberCard: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -37,18 +32,18 @@ export class CreateCardDto {
 
   @ApiProperty()
   @IsNumber()
-  availablePay: number;
+  limitAvailable: number;
 
   @ApiProperty()
   @IsNumber()
-  spentPay: number;
+  amountPayment: number;
 
-  @ApiProperty()
+  @ApiProperty({ enum: Object.keys(Form) })
   @IsNotEmpty()
   @IsEnum(Form)
   form: Form;
 
-  @ApiProperty()
+  @ApiProperty({ enum: Object.keys(Insitution) })
   @IsNotEmpty()
   @IsEnum(Insitution)
   institution: Insitution;
@@ -61,7 +56,7 @@ export class CreateCardDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  stateActive: boolean;
+  stateCard: boolean;
 
   @ApiProperty()
   @IsNotEmpty()

@@ -4,8 +4,8 @@ import { BaseEntity } from './../../../common/base/base-entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 export enum Gender {
-  male = 'male',
-  female = 'female',
+  Masculino = 'Masculino',
+  Feminino = 'Feminino',
 }
 
 @Entity({ name: 'users' })
@@ -22,6 +22,7 @@ export class User extends BaseEntity {
     type: 'enum',
     enum: Gender,
     nullable: false,
+    default: Gender.Masculino,
   })
   gender: Gender;
 
@@ -72,7 +73,12 @@ export class User extends BaseEntity {
   })
   address: Address[];
 
-  @ManyToOne(() => Card, (card: Card) => card.users)
-  @JoinColumn({ name: 'card_id' })
+  @ManyToOne(() => Card, (card: Card) => card.users, {
+    cascade: true,
+  })
+  @JoinColumn({
+    name: 'card_id',
+    referencedColumnName: 'id',
+  })
   card: Card;
 }
