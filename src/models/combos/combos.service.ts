@@ -67,6 +67,10 @@ export class CombosService {
     const combo = await this.comboModel.findOne({
       where: { id: id },
       relations: ['items'],
+      order: {
+        name: 'ASC',
+        id: 'DESC',
+      },
     });
 
     if (!combo) {

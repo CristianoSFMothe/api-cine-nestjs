@@ -54,45 +54,37 @@ export class PaymentService {
 
     payment.tickets = await this.ticketsModel.findByIds(data.tickets);
 
-    // for (let ticket of data.tickets) {
-    //   for (let card of data.cards) {
-    //     let available = 0;
+    let valuePayment = 0;
+    payment.tickets.forEach((ticket) => {
+      payment.cards.forEach(async (card) => {
+        valuePayment = card.limitAvailable - ticket.price;
 
-    //     payment.cards.forEach(async (cardLimit) => {
-    //       card.limitAvailable = cardLimit.limitAvailable;
+        if (valuePayment < 0) {
+          throw new HttpException(
+            `Valor do pagamento é R$ ${ticket.price} não há limite disponivel no cartão ${card.numberCard}`,
+            HttpStatus.NOT_FOUND,
+          );
+        }
 
-    //       console.log(
-    //         '>>>>>>>>>>> LIMITE DISPONIVEL DO CARTÃO',
-    //         card.limitAvailable,
-    //       );
+        if ((card.limitAvailable = 0)) {
+          throw new HttpException(
+            `Não há limite disponivel no cartão ${card.numberCard}`,
+            HttpStatus.NOT_FOUND,
+          );
+        }
+        
+        card.limitAvailable = valuePayment;
 
-    //       payment.tickets.forEach((ticketValue) => {
-    //         ticket.price;
-
-    //         console.log('>>>>>>>>>>> PREÇO DO INGRESSO', ticket.price);
-    //       });
-
-    //       available = ticket.price - card.limitAvailable;
-
-    //       payment.payment = available;
-
-    //       console.log({ available });
-    //     });
-
-    //     if (card.limitAvailable < ticket.price) {
-    //       throw new HttpException(
-    //         `Valor do pagamento é R$ ${ticket.price} não há limite disponivel`,
-    //         HttpStatus.NOT_FOUND,
-    //       );
-    //     }
-    //   }
-    // }
+        await this.cardsModel.save(card);
+      });
+    });
 
     return await this.paymentModel.save(payment);
   }
-
   async show(): Promise<Payment[]> {
-    const payment = await this.paymentModel.find();
+    const payment = await this.paymentModel.find({
+      relations: ['cards', 'tickets'],
+    });
 
     if (payment.length < 1) {
       throw new HttpException(
@@ -102,9 +94,9 @@ export class PaymentService {
     }
     return payment;
   }
-
   async findOne(id: string): Promise<Payment> {
     const payment = await this.paymentModel.findOneOrFail({
+      relations: ['cards', 'tickets'],
       where: { id: id },
     });
 
@@ -114,7 +106,6 @@ export class PaymentService {
 
     return payment;
   }
-
   async update(id: string, data: UpdatePaymentDto): Promise<Payment> {
     const payment = await this.paymentModel.preload({
       id,
@@ -127,7 +118,6 @@ export class PaymentService {
 
     return await this.paymentModel.save(payment);
   }
-
   async remove(id: string): Promise<void> {
     const payment = await this.paymentModel.findOneOrFail({
       where: { id: id },
