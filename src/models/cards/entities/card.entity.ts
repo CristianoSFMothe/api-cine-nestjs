@@ -48,15 +48,6 @@ export class Card extends BaseEntity {
   limitAvailable: number;
 
   @Column({
-    //payAvailable = valor para pagar
-    name: 'amount_payment',
-    type: 'decimal',
-    precision: 10,
-    scale: 2,
-  })
-  amountPayment: number;
-
-  @Column({
     name: 'form',
     type: 'enum',
     enum: Form,
