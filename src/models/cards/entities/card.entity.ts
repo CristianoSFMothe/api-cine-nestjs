@@ -48,6 +48,14 @@ export class Card extends BaseEntity {
   limitAvailable: number;
 
   @Column({
+    name: ' amount_payment',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+  })
+   amountPayment: number;
+
+  @Column({
     name: 'form',
     type: 'enum',
     enum: Form,
@@ -92,4 +100,5 @@ export class Card extends BaseEntity {
     referencedColumnName: 'id',
   })
   payment: Payment;
+ 
 }

@@ -55,7 +55,7 @@ export class PaymentService {
     payment.tickets = await this.ticketsModel.findByIds(data.tickets);
 
     let valuePayment = 0;
-    payment.tickets.forEach((ticket) => {
+    payment.tickets.forEach((ticket) => {      
       payment.cards.forEach(async (card) => {
         valuePayment = card.limitAvailable - ticket.price;
 
@@ -65,19 +65,25 @@ export class PaymentService {
             HttpStatus.NOT_FOUND,
           );
         }
-
-        if ((card.limitAvailable = 0)) {
+        if (card.amountPayment > card.limitAvailable) {
           throw new HttpException(
-            `Não há limite disponivel no cartão ${card.numberCard}`,
+            `Valor do pagamento é R$ ${ticket.price} não há limite disponivel no cartão ${card.numberCard}`,
             HttpStatus.NOT_FOUND,
           );
         }
+
+        // card.limitAvailable = valuePayment;
         
-        card.limitAvailable = valuePayment;
+        card.amountPayment = ticket.price;
+
+        payment.payment = ticket.price;
+
+        await this.paymentModel.save(payment);
 
         await this.cardsModel.save(card);
       });
     });
+    
 
     return await this.paymentModel.save(payment);
   }

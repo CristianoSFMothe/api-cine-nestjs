@@ -34,6 +34,10 @@ export class CreateCardDto {
   @IsNumber()
   limitAvailable: number;
 
+  @ApiProperty()
+  @IsNumber()
+  amountPayment: number;
+
   @ApiProperty({ enum: Object.keys(Form) })
   @IsNotEmpty()
   @IsEnum(Form)
